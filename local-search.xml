@@ -4,6 +4,27 @@
   
   
   <entry>
+    <title>四足知识树整理</title>
+    <link href="/2025/08/12/%E5%9B%9B%E8%B6%B3%E7%9F%A5%E8%AF%86%E6%A0%91%E6%95%B4%E7%90%86/"/>
+    <url>/2025/08/12/%E5%9B%9B%E8%B6%B3%E7%9F%A5%E8%AF%86%E6%A0%91%E6%95%B4%E7%90%86/</url>
+    
+    <content type="html"><![CDATA[<h1 id="四足知识树整理（整理中）"><a href="#四足知识树整理（整理中）" class="headerlink" title="四足知识树整理（整理中）"></a>四足知识树整理（整理中）</h1><h2 id="四足机器人大纲"><a href="#四足机器人大纲" class="headerlink" title="四足机器人大纲"></a>四足机器人大纲</h2><ol><li>控制方式：位控，#力控#，速控<br>作用：控制机器人静止或运动时的平衡状态</li><li>运动状态&#x2F;步态控制<br> 2.1 静态步态<br>2.1.1  #trot步态(对角步态)#<br> 2.2 动态步态<br>2.2.1  跑步步态<br>2.2.2  飞跃步态<br> 2.3 步态规划</li><li>运动执行（和1. 控制方式相关）<br> 3.1 运动学分析<br>3.1.1  正运动学分析<br>3.1.2  逆运动学分析<br> 3.2 静力学分析<br> 3.3 动力学分析<br> 3.4 #步态执行#</li><li>姿态估计<br> 4.1 IMU<br> 4.2卡尔曼滤波</li><li>位置获取<br> 5.1 激光雷达定位<br> 5.2 视觉定位<br> 5.3 IMU里程计定位<br> 5.4 融合定位</li><li>路径规划<br> 6.1 比赛路径规划<br> 6.2 导航路径规划</li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>四足机器人</category>
+      
+      <category>知识树</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Hello World</title>
     <link href="/2025/08/11/hello-world/"/>
     <url>/2025/08/11/hello-world/</url>
