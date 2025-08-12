@@ -4,11 +4,45 @@
   
   
   <entry>
+    <title>四足机器人运动学与动力学</title>
+    <link href="/2025/08/12/%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BF%90%E5%8A%A8%E5%AD%A6%E4%B8%8E%E5%8A%A8%E5%8A%9B%E5%AD%A6-1/"/>
+    <url>/2025/08/12/%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BF%90%E5%8A%A8%E5%AD%A6%E4%B8%8E%E5%8A%A8%E5%8A%9B%E5%AD%A6-1/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>四足机器人运动学与动力学</title>
+    <link href="/2025/08/12/%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BF%90%E5%8A%A8%E5%AD%A6%E4%B8%8E%E5%8A%A8%E5%8A%9B%E5%AD%A6/"/>
+    <url>/2025/08/12/%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BF%90%E5%8A%A8%E5%AD%A6%E4%B8%8E%E5%8A%A8%E5%8A%9B%E5%AD%A6/</url>
+    
+    <content type="html"><![CDATA[<h1 id="四足机器人运动学与动力学"><a href="#四足机器人运动学与动力学" class="headerlink" title="四足机器人运动学与动力学"></a>四足机器人运动学与动力学</h1><h2 id="运动学分析"><a href="#运动学分析" class="headerlink" title="运动学分析"></a>运动学分析</h2><h3 id="单腿运动学分析"><a href="#单腿运动学分析" class="headerlink" title="单腿运动学分析"></a>单腿运动学分析</h3><h4 id="正运动学分析"><a href="#正运动学分析" class="headerlink" title="正运动学分析"></a>正运动学分析</h4><p>概述：已知关节角度，求解足端位置<br>分类：三自由度串联腿，二自由度并联腿。（<strong>以三自由度串联腿为例，二自由度并联腿只需要去掉绕X轴的旋转关节,再加上一个电机角度的换算即可</strong>）<br>步骤：</p><ol><li>建立坐标系：<br> 每个关节（自由度）都代表一个坐标系，以此实现腿部活动。如下图所示，可以建立三个坐标系，还有一个机体自身的坐标系<br> ![腿部连接示意图]{leg_connect.png}</li><li>计算变换矩阵</li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>四足机器人</category>
+      
+      <category>运动学与动力学</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>四足知识树整理</title>
     <link href="/2025/08/12/%E5%9B%9B%E8%B6%B3%E7%9F%A5%E8%AF%86%E6%A0%91%E6%95%B4%E7%90%86/"/>
     <url>/2025/08/12/%E5%9B%9B%E8%B6%B3%E7%9F%A5%E8%AF%86%E6%A0%91%E6%95%B4%E7%90%86/</url>
     
-    <content type="html"><![CDATA[<h1 id="四足知识树整理（整理中）"><a href="#四足知识树整理（整理中）" class="headerlink" title="四足知识树整理（整理中）"></a>四足知识树整理（整理中）</h1><h2 id="四足机器人大纲"><a href="#四足机器人大纲" class="headerlink" title="四足机器人大纲"></a>四足机器人大纲</h2><ol><li>控制方式：位控，<strong>力控</strong>，速控<br>作用：控制机器人静止或运动时的平衡状态</li><li>运动状态&#x2F;步态控制<br> 2.1 静态步态<br>2.1.1  <strong>trot步态(对角步态)</strong><br> 2.2 动态步态<br>2.2.1  跑步步态<br>2.2.2  飞跃步态<br> 2.3 步态规划</li><li>运动执行（和1. 控制方式相关）<br> 3.1 运动学分析<br>3.1.1  正运动学分析<br>3.1.2  逆运动学分析<br> 3.2 静力学分析<br> 3.3 动力学分析<br> 3.4 <strong>步态执行</strong></li><li>姿态估计<br> 4.1 IMU<br> 4.2卡尔曼滤波</li><li>位置获取<br> 5.1 激光雷达定位<br> 5.2 视觉定位<br> 5.3 IMU里程计定位<br> 5.4 融合定位</li><li>路径规划<br> 6.1 比赛路径规划<br> 6.2 导航路径规划</li></ol>]]></content>
+    <content type="html"><![CDATA[<h1 id="四足知识树整理（整理中）"><a href="#四足知识树整理（整理中）" class="headerlink" title="四足知识树整理（整理中）"></a>四足知识树整理（整理中）</h1><h2 id="四足机器人大纲"><a href="#四足机器人大纲" class="headerlink" title="四足机器人大纲"></a>四足机器人大纲</h2><ol><li>控制方式：位控，<strong>力控</strong>，速控<br>作用：控制机器人静止或运动时的平衡状态</li><li>运动状态&#x2F;步态控制<br> 2.1 静态步态<br>2.1.1  <strong>trot步态(对角步态)</strong><br> 2.2 动态步态<br>2.2.1  跑步步态<br>2.2.2  飞跃步态<br> 2.3 步态规划</li><li>运动执行（和1. 控制方式相关）<br> 3.1 运动学分析<br>3.1.1  正运动学分析<br>3.1.2  逆运动学分析<br> 3.2 静力学分析<br> 3.3 动力学分析<br> 3.4 <strong>步态执行</strong></li><li>姿态估计<br> 4.1 IMU<br> 4.2卡尔曼滤波</li><li>位置获取<br> 5.1 激光雷达定位<br> 5.2 视觉定位<br> 5.3 IMU里程计定位<br> 5.4 融合定位</li><li>代码框架</li><li>路径规划<br> 6.1 比赛路径规划<br> 6.2 导航路径规划</li></ol>]]></content>
     
     
     <categories>
