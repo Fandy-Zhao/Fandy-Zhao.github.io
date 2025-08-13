@@ -26,10 +26,12 @@
 <meta property="og:site_name" content="ZF ZHAO">
 <meta property="og:description" content="四足机器人运动学与动力学运动学分析单腿运动学分析正运动学分析概述：已知关节角度，求解足端位置分类：三自由度串联腿，二自由度并联腿。（以三自由度串联腿为例，二自由度并联腿只需要去掉绕X轴的旋转关节,再加上一个电机角度的换算即可）步骤：  建立坐标系： 每个关节（自由度）都代表一个坐标系，以此实现腿部活动。如下图所示，可以建立三个坐标系，还有一个机体自身的坐标系  计算变换矩阵">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/leg_connect.png">
 <meta property="article:published_time" content="2025-08-12T07:25:41.000Z">
-<meta property="article:modified_time" content="2025-08-12T09:41:25.916Z">
+<meta property="article:modified_time" content="2025-08-13T14:57:08.693Z">
 <meta property="article:author" content="ZF ZHAO">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/leg_connect.png">
   
   
   
@@ -288,7 +290,7 @@
                 
                 <h1 id="四足机器人运动学与动力学"><a href="#四足机器人运动学与动力学" class="headerlink" title="四足机器人运动学与动力学"></a>四足机器人运动学与动力学</h1><h2 id="运动学分析"><a href="#运动学分析" class="headerlink" title="运动学分析"></a>运动学分析</h2><h3 id="单腿运动学分析"><a href="#单腿运动学分析" class="headerlink" title="单腿运动学分析"></a>单腿运动学分析</h3><h4 id="正运动学分析"><a href="#正运动学分析" class="headerlink" title="正运动学分析"></a>正运动学分析</h4><p>概述：已知关节角度，求解足端位置<br>分类：三自由度串联腿，二自由度并联腿。（<strong>以三自由度串联腿为例，二自由度并联腿只需要去掉绕X轴的旋转关节,再加上一个电机角度的换算即可</strong>）<br>步骤：</p>
 <ol>
-<li>建立坐标系：<br> 每个关节（自由度）都代表一个坐标系，以此实现腿部活动。如下图所示，可以建立三个坐标系，还有一个机体自身的坐标系 </li>
+<li>建立坐标系：<br> 每个关节（自由度）都代表一个坐标系，以此实现腿部活动。如下图所示，可以建立三个坐标系，还有一个机体自身的坐标系<br> <img src="/img/leg_connect.png" srcset="/img/loading.gif" lazyload alt="腿部连接示意图"></li>
 <li>计算变换矩阵</li>
 </ol>
 
