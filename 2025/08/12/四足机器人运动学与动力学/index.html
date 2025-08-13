@@ -19,16 +19,16 @@
   <meta name="author" content="ZF ZHAO">
   <meta name="keywords" content="">
   
-    <meta name="description" content="四足机器人运动学与动力学运动学分析单腿运动学分析正运动学分析概述：已知关节角度，求解足端位置分类：三自由度串联腿，二自由度并联腿。（以三自由度串联腿为例，二自由度并联腿只需要去掉绕X轴的旋转关节,再加上一个电机角度的换算即可）步骤：  建立坐标系： 每个关节（自由度）都代表一个坐标系，以此实现腿部活动。如下图所示，可以建立三个坐标系，还有一个机体自身的坐标系  计算变换矩阵">
+    <meta name="description" content="四足机器人运动学与动力学运动学分析单腿运动学分析正运动学分析概述：已知关节角度，求解足端位置分类：三自由度串联腿，二自由度并联腿。（以三自由度串联腿为例，二自由度并联腿只需要去掉绕X轴的旋转关节,再加上一个电机角度的换算即可）步骤：  建立坐标系 每个关节（自由度）都代表一个坐标系，以此实现腿部活动。如下图所示，可以建立三个坐标系，还有一个机体自身的坐标系  计算变换矩阵 已知三个角度，每个关节对">
 <meta property="og:type" content="article">
 <meta property="og:title" content="四足机器人运动学与动力学">
 <meta property="og:url" content="http://example.com/2025/08/12/%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BF%90%E5%8A%A8%E5%AD%A6%E4%B8%8E%E5%8A%A8%E5%8A%9B%E5%AD%A6/index.html">
 <meta property="og:site_name" content="ZF ZHAO">
-<meta property="og:description" content="四足机器人运动学与动力学运动学分析单腿运动学分析正运动学分析概述：已知关节角度，求解足端位置分类：三自由度串联腿，二自由度并联腿。（以三自由度串联腿为例，二自由度并联腿只需要去掉绕X轴的旋转关节,再加上一个电机角度的换算即可）步骤：  建立坐标系： 每个关节（自由度）都代表一个坐标系，以此实现腿部活动。如下图所示，可以建立三个坐标系，还有一个机体自身的坐标系  计算变换矩阵">
+<meta property="og:description" content="四足机器人运动学与动力学运动学分析单腿运动学分析正运动学分析概述：已知关节角度，求解足端位置分类：三自由度串联腿，二自由度并联腿。（以三自由度串联腿为例，二自由度并联腿只需要去掉绕X轴的旋转关节,再加上一个电机角度的换算即可）步骤：  建立坐标系 每个关节（自由度）都代表一个坐标系，以此实现腿部活动。如下图所示，可以建立三个坐标系，还有一个机体自身的坐标系  计算变换矩阵 已知三个角度，每个关节对">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/leg_connect.png">
 <meta property="article:published_time" content="2025-08-12T07:25:41.000Z">
-<meta property="article:modified_time" content="2025-08-13T14:57:08.693Z">
+<meta property="article:modified_time" content="2025-08-13T16:01:52.934Z">
 <meta property="article:author" content="ZF ZHAO">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/img/leg_connect.png">
@@ -235,7 +235,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          166 字
+          617 字
         
       </span>
     
@@ -246,7 +246,7 @@
         
         
         
-          2 分钟
+          6 分钟
         
       </span>
     
@@ -290,10 +290,31 @@
                 
                 <h1 id="四足机器人运动学与动力学"><a href="#四足机器人运动学与动力学" class="headerlink" title="四足机器人运动学与动力学"></a>四足机器人运动学与动力学</h1><h2 id="运动学分析"><a href="#运动学分析" class="headerlink" title="运动学分析"></a>运动学分析</h2><h3 id="单腿运动学分析"><a href="#单腿运动学分析" class="headerlink" title="单腿运动学分析"></a>单腿运动学分析</h3><h4 id="正运动学分析"><a href="#正运动学分析" class="headerlink" title="正运动学分析"></a>正运动学分析</h4><p>概述：已知关节角度，求解足端位置<br>分类：三自由度串联腿，二自由度并联腿。（<strong>以三自由度串联腿为例，二自由度并联腿只需要去掉绕X轴的旋转关节,再加上一个电机角度的换算即可</strong>）<br>步骤：</p>
 <ol>
-<li>建立坐标系：<br> 每个关节（自由度）都代表一个坐标系，以此实现腿部活动。如下图所示，可以建立三个坐标系，还有一个机体自身的坐标系<br> <img src="/img/leg_connect.png" srcset="/img/loading.gif" lazyload alt="腿部连接示意图"></li>
-<li>计算变换矩阵</li>
+<li>建立坐标系<br> 每个关节（自由度）都代表一个坐标系，以此实现腿部活动。如下图所示，可以建立三个坐标系，还有一个机体自身的坐标系<br> <img src="/img/leg_connect.png" srcset="/img/loading.gif" lazyload alt="腿部连接示意图"></li>
+<li>计算变换矩阵<br> 已知三个角度，每个关节对应一组旋转矩阵T(0,1),T(1,2),T(2,3)。<br> <strong>注意</strong>：左右腿的腿长互为相反数，便于表示</li>
+<li>求解足端位置<br> 将旋转矩阵和基体系坐标累乘之后可以得到足端位置<br><strong>可以将三个坐标分别看作是三个角度组成的函数，引入雅各比矩阵</strong></li>
 </ol>
-
+<h4 id="逆运动学"><a href="#逆运动学" class="headerlink" title="逆运动学"></a>逆运动学</h4><p>概述：已知足端位置，求解关节角度<br>步骤（详细步骤手动整理，等我学会展示照片）</p>
+<h3 id="单腿静力学分析"><a href="#单腿静力学分析" class="headerlink" title="单腿静力学分析"></a>单腿静力学分析</h3><p><strong>前提</strong>四足机器人静止，此时可以认为关节电机的功率和足端力的<strong>功率守恒</strong>（考虑做功守恒会有当前时刻做功不一样但总功一样，控制精度较差）<br><strong>公式</strong></p>
+<ol>
+<li>力矩乘以角加速度等于足端力乘以线速度</li>
+<li>代入雅各比矩阵的公式化简</li>
+<li>推出关节力矩和足端力的关系 <strong>（和运动学分析得到的雅各比矩阵有关）</strong></li>
+</ol>
+<h3 id="四足运动学"><a href="#四足运动学" class="headerlink" title="四足运动学"></a>四足运动学</h3><h4 id="静止姿态的改变"><a href="#静止姿态的改变" class="headerlink" title="静止姿态的改变"></a>静止姿态的改变</h4><p><strong>目标</strong>：已知机身姿态，求关节角度<br>步骤：</p>
+<ol>
+<li>先假定右前足端为世界系的坐标原点，建立世界坐标系</li>
+<li>计算四个足端相对于世界系的坐标P（s,i）&#x3D;T(s,b)P(b,i)</li>
+<li>姿态不同，<strong>T</strong>会改变，P（b,i）已知，求解P（s,i）</li>
+<li>由<strong>运动学逆解</strong>去推关节角度</li>
+</ol>
+<h4 id="足端速度"><a href="#足端速度" class="headerlink" title="足端速度"></a>足端速度</h4><p>足端速度分解：</p>
+<ol>
+<li>关节转动产生的速度v1(b)（用雅各比矩阵求）</li>
+<li><strong>机身平移旋转</strong>产生的速度v2(b)（目标量）</li>
+</ol>
+<p>背景：机体有平移速度v0,Pi绕PO有角速度wi<br>v2(b)等于v0+wi*(p0-pi)<br>v(s)&#x3D;T(s,b)(v1(b)+v2(b))</p>
+<h3 id="四足动力学"><a href="#四足动力学" class="headerlink" title="四足动力学"></a>四足动力学</h3><h4 id=""><a href="#" class="headerlink" title=""></a></h4>
                 
               </div>
             
