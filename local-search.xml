@@ -4,11 +4,32 @@
   
   
   <entry>
+    <title>深度学习知识树</title>
+    <link href="/2025/08/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%A0%91/"/>
+    <url>/2025/08/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%A0%91/</url>
+    
+    <content type="html"><![CDATA[<ol><li>感知机，多层感知机的实现</li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>知识树</category>
+      
+      <category>深度学习</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>感知机</title>
     <link href="/2025/08/14/%E6%84%9F%E7%9F%A5%E6%9C%BA/"/>
     <url>/2025/08/14/%E6%84%9F%E7%9F%A5%E6%9C%BA/</url>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<p>感知机是由输入input经过线性变化得到特定输出output(0或1)的结构<br>多层感知机引入<strong>非线性层</strong>（激活函数）</p><h2 id="下面是多层感知机手动实现："><a href="#下面是多层感知机手动实现：" class="headerlink" title="下面是多层感知机手动实现："></a>下面是多层感知机手动实现：</h2><p>import torch<br>from torch import nn<br>from d2l import torch as d2l</p><p>batch_size &#x3D; 256<br>#获取数据集<br>train_iter,test_iter &#x3D; d2l.load_data_fashion_mnist(batch_size)</p><p>num_inputs &#x3D; 784  #28*28<br>num_outputs &#x3D; 10  #10个类别<br>num_hiddens &#x3D; 256  #隐藏层神经元个数(超参数)</p><h1 id="训练层参数"><a href="#训练层参数" class="headerlink" title="训练层参数"></a>训练层参数</h1><p>W1 &#x3D; nn.Parameter(<br>    torch.randn(num_inputs, num_hiddens, requires_grad&#x3D;True)#训练时反向传播需要梯度<br>)<br>b1 &#x3D; nn.Parameter(<br>    torch.zeros(num_hiddens, requires_grad&#x3D;True)<br>)</p><p>W2 &#x3D; nn.Parameter(<br>    torch.randn(num_hiddens, num_outputs, requires_grad&#x3D;True)<br>)<br>b2 &#x3D; nn.Parameter(<br>    torch.zeros(num_outputs, requires_grad&#x3D;True)<br>)</p><p>params &#x3D; [W1, b1, W2, b2]</p><p>#实现激活函数<br>def relu(X):<br>    a &#x3D; torch.zeros_like(X)<br>    return torch.max(X, a)</p><p>#实现模型<br>def net(X):<br>    X &#x3D; X.reshape((-1, num_inputs))  #将输入展平<br>    H &#x3D; relu(X @ W1 + b1)  #隐藏层，@表示矩阵乘法<br>    return H @ W2 + b2  #输出层</p><p>num_epochs, lr &#x3D; 10, 0.1  #训练轮数，学习率<br>updater &#x3D; torch.optim.SGD(params, lr&#x3D;lr)  #优化器<br>d2l.train_ch3(<br>    net, train_iter, test_iter, loss&#x3D;nn.CrossEntropyLoss(),num_epochs&#x3D;num_epochs,<br>    updater&#x3D;updater</p><h2 id=""><a href="#" class="headerlink" title=")"></a>)</h2>]]></content>
     
     
     <categories>

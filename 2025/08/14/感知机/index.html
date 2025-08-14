@@ -19,15 +19,15 @@
   <meta name="author" content="ZF ZHAO">
   <meta name="keywords" content="">
   
-    <meta name="description" content="做自己认为有意义的事就好了">
+    <meta name="description" content="感知机是由输入input经过线性变化得到特定输出output(0或1)的结构多层感知机引入非线性层（激活函数） 下面是多层感知机手动实现：import torchfrom torch import nnfrom d2l import torch as d2l batch_size &#x3D; 256#获取数据集train_iter,test_iter &#x3D; d2l.load_data_f">
 <meta property="og:type" content="article">
 <meta property="og:title" content="感知机">
 <meta property="og:url" content="http://example.com/2025/08/14/%E6%84%9F%E7%9F%A5%E6%9C%BA/index.html">
 <meta property="og:site_name" content="ZF ZHAO">
-<meta property="og:description" content="做自己认为有意义的事就好了">
+<meta property="og:description" content="感知机是由输入input经过线性变化得到特定输出output(0或1)的结构多层感知机引入非线性层（激活函数） 下面是多层感知机手动实现：import torchfrom torch import nnfrom d2l import torch as d2l batch_size &#x3D; 256#获取数据集train_iter,test_iter &#x3D; d2l.load_data_f">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-08-14T04:37:14.000Z">
-<meta property="article:modified_time" content="2025-08-14T04:38:10.895Z">
+<meta property="article:modified_time" content="2025-08-14T16:01:23.134Z">
 <meta property="article:author" content="ZF ZHAO">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -233,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          249 字
         
       </span>
     
@@ -244,7 +244,7 @@
         
         
         
-          1 分钟
+          3 分钟
         
       </span>
     
@@ -286,7 +286,17 @@
             
               <div class="markdown-body">
                 
-                
+                <p>感知机是由输入input经过线性变化得到特定输出output(0或1)的结构<br>多层感知机引入<strong>非线性层</strong>（激活函数）</p>
+<h2 id="下面是多层感知机手动实现："><a href="#下面是多层感知机手动实现：" class="headerlink" title="下面是多层感知机手动实现："></a>下面是多层感知机手动实现：</h2><p>import torch<br>from torch import nn<br>from d2l import torch as d2l</p>
+<p>batch_size &#x3D; 256<br>#获取数据集<br>train_iter,test_iter &#x3D; d2l.load_data_fashion_mnist(batch_size)</p>
+<p>num_inputs &#x3D; 784  #28*28<br>num_outputs &#x3D; 10  #10个类别<br>num_hiddens &#x3D; 256  #隐藏层神经元个数(超参数)</p>
+<h1 id="训练层参数"><a href="#训练层参数" class="headerlink" title="训练层参数"></a>训练层参数</h1><p>W1 &#x3D; nn.Parameter(<br>    torch.randn(num_inputs, num_hiddens, requires_grad&#x3D;True)#训练时反向传播需要梯度<br>)<br>b1 &#x3D; nn.Parameter(<br>    torch.zeros(num_hiddens, requires_grad&#x3D;True)<br>)</p>
+<p>W2 &#x3D; nn.Parameter(<br>    torch.randn(num_hiddens, num_outputs, requires_grad&#x3D;True)<br>)<br>b2 &#x3D; nn.Parameter(<br>    torch.zeros(num_outputs, requires_grad&#x3D;True)<br>)</p>
+<p>params &#x3D; [W1, b1, W2, b2]</p>
+<p>#实现激活函数<br>def relu(X):<br>    a &#x3D; torch.zeros_like(X)<br>    return torch.max(X, a)</p>
+<p>#实现模型<br>def net(X):<br>    X &#x3D; X.reshape((-1, num_inputs))  #将输入展平<br>    H &#x3D; relu(X @ W1 + b1)  #隐藏层，@表示矩阵乘法<br>    return H @ W2 + b2  #输出层</p>
+<p>num_epochs, lr &#x3D; 10, 0.1  #训练轮数，学习率<br>updater &#x3D; torch.optim.SGD(params, lr&#x3D;lr)  #优化器<br>d2l.train_ch3(<br>    net, train_iter, test_iter, loss&#x3D;nn.CrossEntropyLoss(),num_epochs&#x3D;num_epochs,<br>    updater&#x3D;updater</p>
+<h2 id=""><a href="#" class="headerlink" title=")"></a>)</h2>
                 
               </div>
             
@@ -368,6 +378,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2025/08/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%A0%91/" title="深度学习知识树">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">深度学习知识树</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
