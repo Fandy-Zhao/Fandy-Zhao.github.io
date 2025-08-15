@@ -19,21 +19,23 @@
   <meta name="author" content="ZF ZHAO">
   <meta name="keywords" content="">
   
-    <meta name="description" content="感知机，多层感知机的实现">
+    <meta name="description" content="梯度爆炸目的限制权重w，防止梯度爆炸 内容讲解 代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647import matplotlib.pyplot as pltimport torchfrom torch import nnfrom d2l import torch as d">
 <meta property="og:type" content="article">
-<meta property="og:title" content="深度学习知识树">
-<meta property="og:url" content="http://example.com/2025/08/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%A0%91/index.html">
+<meta property="og:title" content="权重衰退  梯度爆炸">
+<meta property="og:url" content="http://example.com/2025/08/15/%E6%9D%83%E9%87%8D%E8%A1%B0%E9%80%80/index.html">
 <meta property="og:site_name" content="ZF ZHAO">
-<meta property="og:description" content="感知机，多层感知机的实现">
+<meta property="og:description" content="梯度爆炸目的限制权重w，防止梯度爆炸 内容讲解 代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647import matplotlib.pyplot as pltimport torchfrom torch import nnfrom d2l import torch as d">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-08-14T15:56:47.000Z">
-<meta property="article:modified_time" content="2025-08-14T15:58:17.472Z">
+<meta property="og:image" content="http://example.com/%E5%8E%9F%E7%90%86%E5%8F%8A%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D">
+<meta property="article:published_time" content="2025-08-15T09:01:35.000Z">
+<meta property="article:modified_time" content="2025-08-15T16:38:20.573Z">
 <meta property="article:author" content="ZF ZHAO">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/%E5%8E%9F%E7%90%86%E5%8F%8A%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D">
   
   
   
-  <title>深度学习知识树 - ZF ZHAO</title>
+  <title>权重衰退  梯度爆炸 - ZF ZHAO</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -210,7 +212,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="深度学习知识树"></span>
+            <span id="subtitle" data-typed-text="权重衰退  梯度爆炸"></span>
           
         </div>
 
@@ -221,8 +223,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-08-14 23:56" pubdate>
-          2025年8月14日 晚上
+        <time datetime="2025-08-15 17:01" pubdate>
+          2025年8月15日 下午
         </time>
       </span>
     
@@ -233,7 +235,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          11 字
+          347 字
         
       </span>
     
@@ -244,7 +246,7 @@
         
         
         
-          1 分钟
+          3 分钟
         
       </span>
     
@@ -281,15 +283,17 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">深度学习知识树</h1>
+            <h1 id="seo-header">权重衰退  梯度爆炸</h1>
             
             
               <div class="markdown-body">
                 
-                <ol>
-<li>感知机，多层感知机的实现</li>
-</ol>
+                <h1 id="梯度爆炸"><a href="#梯度爆炸" class="headerlink" title="梯度爆炸"></a>梯度爆炸</h1><h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a><strong>目的</strong></h2><p>限制权重w，防止梯度爆炸</p>
+<h2 id="内容讲解"><a href="#内容讲解" class="headerlink" title="内容讲解"></a>内容讲解</h2><p><img src="/%E5%8E%9F%E7%90%86%E5%8F%8A%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D" srcset="/img/loading.gif" lazyload alt="img&#x2F;权重衰退.png"></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a><strong>代码</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><br><span class="hljs-keyword">import</span> torch<br><span class="hljs-keyword">from</span> torch <span class="hljs-keyword">import</span> nn<br><span class="hljs-keyword">from</span> d2l <span class="hljs-keyword">import</span> torch <span class="hljs-keyword">as</span> d2l<br><br><span class="hljs-comment">#生成人工数据集</span><br>n_train, n_test, num_inputs = <span class="hljs-number">20</span>, <span class="hljs-number">100</span>, <span class="hljs-number">200</span><br>batch_size = <span class="hljs-number">5</span><br>true_w, true_b = torch.ones((num_inputs, <span class="hljs-number">1</span>)) * <span class="hljs-number">0.01</span>, <span class="hljs-number">0.05</span><br>train_data = d2l.synthetic_data(true_w,true_b,n_train)<br>train_iter = d2l.load_array(train_data, batch_size)<br>test_data = d2l.synthetic_data(true_w,true_b,n_test)<br>test_iter = d2l.load_array(test_data, batch_size, is_train=<span class="hljs-literal">False</span>)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">init_params</span>():<br>    w = torch.normal(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, size=(num_inputs, <span class="hljs-number">1</span>), requires_grad=<span class="hljs-literal">True</span>)<br>    b = torch.zeros(<span class="hljs-number">1</span>, requires_grad=<span class="hljs-literal">True</span>)<br>    <span class="hljs-keyword">return</span> [w, b]<br><br><span class="hljs-comment"># L2范数惩罚(权重衰退的关键)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">l2_penalty</span>(<span class="hljs-params">w</span>):<br>    <span class="hljs-keyword">return</span> torch.<span class="hljs-built_in">sum</span>(w.<span class="hljs-built_in">pow</span>(<span class="hljs-number">2</span>)) / <span class="hljs-number">2</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">train</span>(<span class="hljs-params">lambd</span>):<br>    w, b = init_params()<br>    net, loss = <span class="hljs-keyword">lambda</span> X: d2l.linreg(X, w, b), d2l.squared_loss<br>    num_epochs, lr = <span class="hljs-number">100</span>, <span class="hljs-number">0.003</span><br><br>    <span class="hljs-comment">#训练,animator用于绘图</span><br>    animator = d2l.Animator(xlabel=<span class="hljs-string">&#x27;epoch&#x27;</span>, ylabel=<span class="hljs-string">&#x27;loss&#x27;</span>, yscale=<span class="hljs-string">&#x27;log&#x27;</span>,<br>                            xlim=[<span class="hljs-number">5</span>, num_epochs], legend=[<span class="hljs-string">&#x27;train&#x27;</span>, <span class="hljs-string">&#x27;test&#x27;</span>])<br>    <span class="hljs-keyword">for</span> epoch <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(num_epochs):<br>        <span class="hljs-keyword">for</span> X, y <span class="hljs-keyword">in</span> train_iter:<br>            l = loss(net(X), y) + lambd * l2_penalty(w)<br>            l.<span class="hljs-built_in">sum</span>().backward()  <span class="hljs-comment">#计算梯度,backword()只能用于标量,所以要用sum()将l变成标量</span><br>            d2l.sgd([w, b], lr, batch_size)  <span class="hljs-comment">#使用小批量随机梯度下降迭代模型参数</span><br>        <span class="hljs-keyword">if</span> (epoch + <span class="hljs-number">1</span>) % <span class="hljs-number">5</span> == <span class="hljs-number">0</span>:<br>            animator.add(epoch + <span class="hljs-number">1</span>, (d2l.evaluate_loss(net, train_iter, loss),<br>                                     d2l.evaluate_loss(net, test_iter, loss)))<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;w的L2范数是：&#x27;</span>, torch.norm(w).item()) <br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    <span class="hljs-comment"># 训练时加权衰退</span><br>    train(lambd=<span class="hljs-number">10</span>)<br>    plt.show()  <br><br></code></pre></td></tr></table></figure>
 
+<h2 id="个人理解"><a href="#个人理解" class="headerlink" title="个人理解"></a><strong>个人理解</strong></h2><p>在训练时引用权重参数L2惩罚，可以有效限制权重w的增长，即总体损失和w的增长共同限制参数变化。因为当w变化过大时，随着深度增加，梯度呈指数级增长，会导致梯度爆炸。</p>
+<h1 id="梯度爆炸-1"><a href="#梯度爆炸-1" class="headerlink" title="梯度爆炸"></a>梯度爆炸</h1>
                 
               </div>
             
@@ -314,16 +318,6 @@
       </span>
     
   
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E7%9F%A5%E8%AF%86%E6%A0%91/" class="category-chain-item">知识树</a>
-  
-  
-
-      </span>
-    
-  
 </span>
 
     </div>
@@ -337,8 +331,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>深度学习知识树</div>
-      <div>http://example.com/2025/08/14/深度学习知识树/</div>
+      <div>权重衰退  梯度爆炸</div>
+      <div>http://example.com/2025/08/15/权重衰退/</div>
     </div>
     <div class="license-meta">
       
@@ -350,7 +344,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年8月14日</div>
+          <div>2025年8月15日</div>
         </div>
       
       
@@ -382,9 +376,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/08/15/%E6%9D%83%E9%87%8D%E8%A1%B0%E9%80%80/" title="权重衰退  梯度爆炸">
+                      <a href="/2025/08/16/%E4%B8%A2%E5%BC%83%E6%B3%95/" title="丢弃法  正则化">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">权重衰退  梯度爆炸</span>
+                        <span class="hidden-mobile">丢弃法  正则化</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -392,8 +386,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/08/14/%E6%84%9F%E7%9F%A5%E6%9C%BA/" title="感知机">
-                        <span class="hidden-mobile">感知机</span>
+                      <a href="/2025/08/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%A0%91/" title="深度学习知识树">
+                        <span class="hidden-mobile">深度学习知识树</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
