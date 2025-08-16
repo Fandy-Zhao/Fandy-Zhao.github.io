@@ -4,6 +4,27 @@
   
   
   <entry>
+    <title>LOAM代码笔记</title>
+    <link href="/2025/08/16/LOAM%E4%BB%A3%E7%A0%81%E7%AC%94%E8%AE%B0/"/>
+    <url>/2025/08/16/LOAM%E4%BB%A3%E7%A0%81%E7%AC%94%E8%AE%B0/</url>
+    
+    <content type="html"><![CDATA[<h1 id="LOAM代码笔记"><a href="#LOAM代码笔记" class="headerlink" title="LOAM代码笔记"></a>LOAM代码笔记</h1><h2 id="scanRegistration-cpp"><a href="#scanRegistration-cpp" class="headerlink" title="scanRegistration.cpp"></a><strong>scanRegistration.cpp</strong></h2><h3 id="目的："><a href="#目的：" class="headerlink" title="目的："></a>目的：</h3><p>实现激光点云的配准，主要包括点云的预处理、特征提取和配准过程。</p><h3 id="功能："><a href="#功能：" class="headerlink" title="功能："></a>功能：</h3><ol><li>订阅原始点云信息，对每周期点云按线序排列（原始信息是混乱的）。需要计算angle俯仰角和ori偏角，angle负责得出该点云的竖直方向的线序，ori负责的出点云的说平偏转度，两者组合成intensity。处理后的每个点云都有x,y,z,intensity四个信息。</li><li>对每周期点云进行特征提取，包括提取角点和面点。计算曲率cloudCurvature，根据曲率判断是否为角点或面点。</li><li>发布处理后的点云信息，包括角点和面点。<br><img src="/img/A_LOAM1.png" alt="流程整理"></li></ol><h2 id="laserOdometry-cpp"><a href="#laserOdometry-cpp" class="headerlink" title="laserOdometry.cpp"></a><strong>laserOdometry.cpp</strong></h2><h3 id="目的：-1"><a href="#目的：-1" class="headerlink" title="目的："></a>目的：</h3><p>通过读取scanRegistration.cpp中的信息来计算帧与帧之间的变化，最终得到里程计坐标系下的激光雷达的位姿。(前端激光里程计和位姿粗估计)</p><h3 id="功能：-1"><a href="#功能：-1" class="headerlink" title="功能："></a>功能：</h3><ol><li>订阅scanRegistration.cpp中的信息，包括角点和面点。<br>2.判断数据是否异常</li><li>将当前帧映射到上一帧，需要求解变换矩阵。<br><strong>偏原理的优化部分没太看懂，需要看一下论文再去找对应部分</strong></li><li>发布位姿（激光里程计）<br><img src="/img/A_LOAM2.png" alt="流程整理"></li></ol><h2 id="laserMapping-cpp"><a href="#laserMapping-cpp" class="headerlink" title="laserMapping.cpp"></a><strong>laserMapping.cpp</strong></h2><h3 id="目的：-2"><a href="#目的：-2" class="headerlink" title="目的："></a>目的：</h3><p>通过已经获得的激光里程计信息来消除激光里程计和地图之间的误差（也就是累计的误差），使得最终的姿态都是关于世界坐标的，并建图</p><h3 id="理解"><a href="#理解" class="headerlink" title="理解:"></a>理解:</h3><ol><li>先创建一个21<em>21</em>1的大空间，每次只关注自身周围的5<em>5</em>1的小空间。<br>2.可以通过大地图的动态调整，来使得小地图处于大地图的中心位置。</li><li>之后的数学计算不太理解，需要看一下论文再去找对应部分。</li></ol><p><img src="/img/A_LOAM3.png" alt="流程介绍"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>SLAM</category>
+      
+      <category>LOAM</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>丢弃法  正则化</title>
     <link href="/2025/08/16/%E4%B8%A2%E5%BC%83%E6%B3%95/"/>
     <url>/2025/08/16/%E4%B8%A2%E5%BC%83%E6%B3%95/</url>

@@ -19,23 +19,25 @@
   <meta name="author" content="ZF ZHAO">
   <meta name="keywords" content="">
   
-    <meta name="description" content="丢弃法目的在训练中加入偏差，使得训练更稳定 方法训练时在隐藏层后加一层扰动，在加入噪音的基础上不改变原先的期望。在推理时不使用。 内容讲解 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354import torch from torch impor">
+    <meta name="description" content="LOAM代码笔记scanRegistration.cpp目的：实现激光点云的配准，主要包括点云的预处理、特征提取和配准过程。 功能： 订阅原始点云信息，对每周期点云按线序排列（原始信息是混乱的）。需要计算angle俯仰角和ori偏角，angle负责得出该点云的竖直方向的线序，ori负责的出点云的说平偏转度，两者组合成intensity。处理后的每个点云都有x,y,z,intensity四个信息。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="丢弃法  正则化">
-<meta property="og:url" content="http://example.com/2025/08/16/%E4%B8%A2%E5%BC%83%E6%B3%95/index.html">
+<meta property="og:title" content="LOAM代码笔记">
+<meta property="og:url" content="http://example.com/2025/08/16/LOAM%E4%BB%A3%E7%A0%81%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="ZF ZHAO">
-<meta property="og:description" content="丢弃法目的在训练中加入偏差，使得训练更稳定 方法训练时在隐藏层后加一层扰动，在加入噪音的基础上不改变原先的期望。在推理时不使用。 内容讲解 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354import torch from torch impor">
+<meta property="og:description" content="LOAM代码笔记scanRegistration.cpp目的：实现激光点云的配准，主要包括点云的预处理、特征提取和配准过程。 功能： 订阅原始点云信息，对每周期点云按线序排列（原始信息是混乱的）。需要计算angle俯仰角和ori偏角，angle负责得出该点云的竖直方向的线序，ori负责的出点云的说平偏转度，两者组合成intensity。处理后的每个点云都有x,y,z,intensity四个信息。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/img/dropout.png">
-<meta property="article:published_time" content="2025-08-15T16:28:16.000Z">
-<meta property="article:modified_time" content="2025-08-15T16:50:05.205Z">
+<meta property="og:image" content="http://example.com/img/A_LOAM1.png">
+<meta property="og:image" content="http://example.com/img/A_LOAM2.png">
+<meta property="og:image" content="http://example.com/img/A_LOAM3.png">
+<meta property="article:published_time" content="2025-08-16T06:03:33.000Z">
+<meta property="article:modified_time" content="2025-08-16T16:14:58.161Z">
 <meta property="article:author" content="ZF ZHAO">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/img/dropout.png">
+<meta name="twitter:image" content="http://example.com/img/A_LOAM1.png">
   
   
   
-  <title>丢弃法  正则化 - ZF ZHAO</title>
+  <title>LOAM代码笔记 - ZF ZHAO</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -212,7 +214,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="丢弃法  正则化"></span>
+            <span id="subtitle" data-typed-text="LOAM代码笔记"></span>
           
         </div>
 
@@ -223,8 +225,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-08-16 00:28" pubdate>
-          2025年8月16日 凌晨
+        <time datetime="2025-08-16 14:03" pubdate>
+          2025年8月16日 下午
         </time>
       </span>
     
@@ -235,7 +237,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          405 字
+          464 字
         
       </span>
     
@@ -283,17 +285,29 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">丢弃法  正则化</h1>
+            <h1 id="seo-header">LOAM代码笔记</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="丢弃法"><a href="#丢弃法" class="headerlink" title="丢弃法"></a>丢弃法</h1><h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a><strong>目的</strong></h2><p>在训练中加入偏差，使得训练更稳定</p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p><strong>训练</strong>时在隐藏层后加一层扰动，在加入噪音的基础上不改变原先的期望。在<strong>推理</strong>时不使用。</p>
-<h2 id="内容讲解"><a href="#内容讲解" class="headerlink" title="内容讲解"></a>内容讲解</h2><p><img src="/img/dropout.png" srcset="/img/loading.gif" lazyload alt="原理及方法介绍"></p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a><strong>代码</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> torch <br><span class="hljs-keyword">from</span> torch <span class="hljs-keyword">import</span> nn<br><span class="hljs-keyword">from</span> d2l <span class="hljs-keyword">import</span> torch <span class="hljs-keyword">as</span> d2l<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">droppot_layer</span>(<span class="hljs-params">X,dropput</span>):<br>    <span class="hljs-keyword">assert</span> <span class="hljs-number">0</span> &lt;= dropput &lt;= <span class="hljs-number">1</span>   <span class="hljs-comment">#限制dropput的范围</span><br>    <span class="hljs-keyword">if</span> dropput == <span class="hljs-number">0</span>:  <span class="hljs-comment">#如果dropput为0,则</span><br>        <span class="hljs-keyword">return</span> X<br>    <span class="hljs-keyword">if</span> dropput == <span class="hljs-number">1</span>:  <span class="hljs-comment">#如果dropput为1,则</span><br>        <span class="hljs-keyword">return</span> torch.zeros_like(X)  <span class="hljs-comment">#返回与X同形状的全0张</span><br>    mask = (torch.randn(X.shape) &gt; dropput).<span class="hljs-built_in">float</span>()  <span class="hljs-comment">#生成与X同形状的mask张量（0或1 ）</span><br><br>    <span class="hljs-keyword">return</span> mask * X / (<span class="hljs-number">1.0</span> - dropput)  <span class="hljs-comment">#返回mask</span><br><br><br><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Net</span>(nn.Module):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self,num_inputs, num_outputs, num_hiddens1, num_hidden2, dropout1, dropout2</span>):<br>        <span class="hljs-built_in">super</span>(Net, <span class="hljs-variable language_">self</span>).__init__()<br>        <span class="hljs-variable language_">self</span>.flatten = nn.Flatten()<br>        <span class="hljs-variable language_">self</span>.linear1 = nn.Linear(num_inputs, num_hiddens1)       <span class="hljs-comment">#隐藏层1</span><br>        <span class="hljs-variable language_">self</span>.linear2 = nn.Linear(num_hiddens1, num_hidden2)      <span class="hljs-comment">#隐藏层2</span><br>        <span class="hljs-variable language_">self</span>.linear3 = nn.Linear(num_hidden2, num_outputs)       <span class="hljs-comment">#输出层</span><br>        <span class="hljs-variable language_">self</span>.relu = nn.ReLU()  <span class="hljs-comment"># 定义ReLU激活函数</span><br>        <span class="hljs-variable language_">self</span>.dropout1 = dropout1  <span class="hljs-comment">#隐藏层1的dropout率</span><br>        <span class="hljs-variable language_">self</span>.dropout2 = dropout2<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">forward</span>(<span class="hljs-params">self, X</span>):<br>        H1 = torch.relu(<span class="hljs-variable language_">self</span>.linear1(<span class="hljs-variable language_">self</span>.flatten(X.reshape((-<span class="hljs-number">1</span>, num_inputs)))))  <span class="hljs-comment">#隐藏层1</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.training:  <span class="hljs-comment">#如果模型处于训练模式</span><br>            H1 = droppot_layer(H1, dropout1)  <span class="hljs-comment">#对隐藏层1应用dropout</span><br>        H2 = <span class="hljs-variable language_">self</span>.relu(<span class="hljs-variable language_">self</span>.linear2(H1))  <span class="hljs-comment">#隐藏层2</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.training:  <span class="hljs-comment">#如果模型处于训练模式</span><br>            H2 = droppot_layer(H2, dropout2)  <span class="hljs-comment">#对隐藏层2应用dropout</span><br>        out = <span class="hljs-variable language_">self</span>.linear3(H2)  <span class="hljs-comment">#输出层</span><br>        <span class="hljs-keyword">return</span> out<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    X = torch.arange(<span class="hljs-number">784</span>, dtype=torch.float32).reshape((<span class="hljs-number">28</span>, <span class="hljs-number">28</span>))<br>    num_inputs, num_outputs, num_hiddens1, num_hidden2 = <span class="hljs-number">784</span>,<span class="hljs-number">10</span>,<span class="hljs-number">256</span>,<span class="hljs-number">256</span><br>    dropout1, dropout2 = <span class="hljs-number">0.2</span>, <span class="hljs-number">0.5</span><br><br>    net = Net(num_inputs, num_outputs, num_hiddens1, num_hidden2, dropout1, dropout2)<br>    num_epochs, lr, batch_size = <span class="hljs-number">10</span>, <span class="hljs-number">0.1</span>, <span class="hljs-number">256</span><br>    loss = nn.CrossEntropyLoss()<br>    train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)<br>    trainer = torch.optim.SGD(net.parameters(), lr=lr)<br>    d2l.train_ch3(<br>        net, train_iter, test_iter, loss, num_epochs, trainer<br>    )<br>    plt.show()  <span class="hljs-comment"># 确保脚本运行时弹出图像窗口</span><br>    <span class="hljs-built_in">print</span>(net(X))  <span class="hljs-comment"># 测试网络输出</span><br></code></pre></td></tr></table></figure>
-
-<h2 id="个人理解"><a href="#个人理解" class="headerlink" title="个人理解"></a><strong>个人理解</strong></h2><p>丢弃法是在训练时，随机舍弃几个输入值，并对其他输入做处理，即加入噪音又维持偏差为0</p>
+                <h1 id="LOAM代码笔记"><a href="#LOAM代码笔记" class="headerlink" title="LOAM代码笔记"></a>LOAM代码笔记</h1><h2 id="scanRegistration-cpp"><a href="#scanRegistration-cpp" class="headerlink" title="scanRegistration.cpp"></a><strong>scanRegistration.cpp</strong></h2><h3 id="目的："><a href="#目的：" class="headerlink" title="目的："></a>目的：</h3><p>实现激光点云的配准，主要包括点云的预处理、特征提取和配准过程。</p>
+<h3 id="功能："><a href="#功能：" class="headerlink" title="功能："></a>功能：</h3><ol>
+<li>订阅原始点云信息，对每周期点云按线序排列（原始信息是混乱的）。需要计算angle俯仰角和ori偏角，angle负责得出该点云的竖直方向的线序，ori负责的出点云的说平偏转度，两者组合成intensity。处理后的每个点云都有x,y,z,intensity四个信息。</li>
+<li>对每周期点云进行特征提取，包括提取角点和面点。计算曲率cloudCurvature，根据曲率判断是否为角点或面点。</li>
+<li>发布处理后的点云信息，包括角点和面点。<br><img src="/img/A_LOAM1.png" srcset="/img/loading.gif" lazyload alt="流程整理"></li>
+</ol>
+<h2 id="laserOdometry-cpp"><a href="#laserOdometry-cpp" class="headerlink" title="laserOdometry.cpp"></a><strong>laserOdometry.cpp</strong></h2><h3 id="目的：-1"><a href="#目的：-1" class="headerlink" title="目的："></a>目的：</h3><p>通过读取scanRegistration.cpp中的信息来计算帧与帧之间的变化，最终得到里程计坐标系下的激光雷达的位姿。(前端激光里程计和位姿粗估计)</p>
+<h3 id="功能：-1"><a href="#功能：-1" class="headerlink" title="功能："></a>功能：</h3><ol>
+<li>订阅scanRegistration.cpp中的信息，包括角点和面点。<br>2.判断数据是否异常</li>
+<li>将当前帧映射到上一帧，需要求解变换矩阵。<br><strong>偏原理的优化部分没太看懂，需要看一下论文再去找对应部分</strong></li>
+<li>发布位姿（激光里程计）<br><img src="/img/A_LOAM2.png" srcset="/img/loading.gif" lazyload alt="流程整理"></li>
+</ol>
+<h2 id="laserMapping-cpp"><a href="#laserMapping-cpp" class="headerlink" title="laserMapping.cpp"></a><strong>laserMapping.cpp</strong></h2><h3 id="目的：-2"><a href="#目的：-2" class="headerlink" title="目的："></a>目的：</h3><p>通过已经获得的激光里程计信息来消除激光里程计和地图之间的误差（也就是累计的误差），使得最终的姿态都是关于世界坐标的，并建图</p>
+<h3 id="理解"><a href="#理解" class="headerlink" title="理解:"></a>理解:</h3><ol>
+<li>先创建一个21<em>21</em>1的大空间，每次只关注自身周围的5<em>5</em>1的小空间。<br>2.可以通过大地图的动态调整，来使得小地图处于大地图的中心位置。</li>
+<li>之后的数学计算不太理解，需要看一下论文再去找对应部分。</li>
+</ol>
+<p><img src="/img/A_LOAM3.png" srcset="/img/loading.gif" lazyload alt="流程介绍"></p>
 
                 
               </div>
@@ -312,8 +326,15 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="category-chain-item">深度学习</a>
+  <a href="/categories/SLAM/" class="category-chain-item">SLAM</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/SLAM/LOAM/" class="category-chain-item">LOAM</a>
+  
+  
+
   
 
       </span>
@@ -332,8 +353,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>丢弃法  正则化</div>
-      <div>http://example.com/2025/08/16/丢弃法/</div>
+      <div>LOAM代码笔记</div>
+      <div>http://example.com/2025/08/16/LOAM代码笔记/</div>
     </div>
     <div class="license-meta">
       
@@ -377,18 +398,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/08/16/LOAM%E4%BB%A3%E7%A0%81%E7%AC%94%E8%AE%B0/" title="LOAM代码笔记">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">LOAM代码笔记</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/08/15/%E6%9D%83%E9%87%8D%E8%A1%B0%E9%80%80/" title="权重衰退  梯度爆炸">
-                        <span class="hidden-mobile">权重衰退  梯度爆炸</span>
+                      <a href="/2025/08/16/%E4%B8%A2%E5%BC%83%E6%B3%95/" title="丢弃法  正则化">
+                        <span class="hidden-mobile">丢弃法  正则化</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
