@@ -4,6 +4,27 @@
   
   
   <entry>
+    <title>LOAM论文笔记</title>
+    <link href="/2025/08/18/25_08_18LOAM%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+    <url>/2025/08/18/25_08_18LOAM%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</url>
+    
+    <content type="html"><![CDATA[<h1 id="LOAM-Lidar-Odometry-and-Mapping-in-Real-time-笔记"><a href="#LOAM-Lidar-Odometry-and-Mapping-in-Real-time-笔记" class="headerlink" title="LOAM: Lidar Odometry and Mapping in Real-time 笔记"></a>LOAM: Lidar Odometry and Mapping in Real-time 笔记</h1><h2 id="论文概述"><a href="#论文概述" class="headerlink" title="论文概述"></a>论文概述</h2><p>实时性的位姿估计定位和建图算法，既有高频率低精度里程计进行运动估计，又有低频率高精度点云匹配来地图建图。</p><h2 id="算法一-LIDAR-ODOMETRY"><a href="#算法一-LIDAR-ODOMETRY" class="headerlink" title="算法一  LIDAR ODOMETRY"></a>算法一  LIDAR ODOMETRY</h2><ol><li><strong>特征点匹配</strong>：通过计算曲率c来判断点是否为角点或面点。在c的计算中引入S来消除距离影响，将每一次扫描分成多个相同的子区域，保证特征点的均匀分布。还要注意排除几种特殊情况。</li><li><strong>寻找对应特征点集合</strong>：<ul><li>先将前一时刻的点云投影到当前时刻。</li><li>利用两个时刻的点云信息来进行角点和面点的匹配，使用最近邻搜索相邻特征点，角点进行点到直线的距离计算，面点进行点到平面的距离计算。</li></ul></li><li><strong>运动动作估计</strong>：<ul><li>通过角点和面点的匹配来计算变换矩阵T。</li><li>知道在一段时间内的变化矩阵T,假设运动是均匀的，可以利用时间进行线性插值，得到当前时刻的变换矩阵T。</li><li>利用变换矩阵T来根据投影量更新当前时刻的点云坐标。</li><li>进而将该特征点的距离公式作为损失函数，利用优化算法来求解变换矩阵T，使得距离趋近于0.</li></ul></li><li><strong>伪代码</strong><br><img src="/img/LOAM%E4%BC%AA%E4%BB%A3%E7%A0%811.png" alt="伪代码"></li></ol><h2 id="算法二-LIDAR-MAPPING"><a href="#算法二-LIDAR-MAPPING" class="headerlink" title="算法二  LIDAR MAPPING"></a>算法二  LIDAR MAPPING</h2>]]></content>
+    
+    
+    <categories>
+      
+      <category>SLAM</category>
+      
+      <category>LOAM</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>拉普拉斯变换，带通滤波器变换手稿整理</title>
     <link href="/2025/08/17/25_08_17%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E5%8F%98%E6%8D%A2%EF%BC%8C%E5%B8%A6%E9%80%9A%E6%BB%A4%E6%B3%A2%E5%99%A8%E5%8F%98%E6%8D%A2%E6%89%8B%E7%A8%BF%E6%95%B4%E7%90%86/"/>
     <url>/2025/08/17/25_08_17%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E5%8F%98%E6%8D%A2%EF%BC%8C%E5%B8%A6%E9%80%9A%E6%BB%A4%E6%B3%A2%E5%99%A8%E5%8F%98%E6%8D%A2%E6%89%8B%E7%A8%BF%E6%95%B4%E7%90%86/</url>
