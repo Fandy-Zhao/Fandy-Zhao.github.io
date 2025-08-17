@@ -19,25 +19,21 @@
   <meta name="author" content="ZF ZHAO">
   <meta name="keywords" content="">
   
-    <meta name="description" content="LOAM代码笔记scanRegistration.cpp目的：实现激光点云的配准，主要包括点云的预处理、特征提取和配准过程。 功能： 订阅原始点云信息，对每周期点云按线序排列（原始信息是混乱的）。需要计算angle俯仰角和ori偏角，angle负责得出该点云的竖直方向的线序，ori负责的出点云的说平偏转度，两者组合成intensity。处理后的每个点云都有x,y,z,intensity四个信息。">
+    <meta name="description" content="pytorch基础自定义块12345678910111213import torchfrom torch import nnfrom torch.nn import functional as Fclass MLP(nn.Module):    def __init__(self):        super().__init__()        self.hidden &#x3D; nn.Linear(">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LOAM代码笔记">
-<meta property="og:url" content="http://example.com/2025/08/16/25_08_16LOAM%E4%BB%A3%E7%A0%81%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:title" content="pytorch基础">
+<meta property="og:url" content="http://example.com/2025/08/17/25_08_17pytorch%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="ZF ZHAO">
-<meta property="og:description" content="LOAM代码笔记scanRegistration.cpp目的：实现激光点云的配准，主要包括点云的预处理、特征提取和配准过程。 功能： 订阅原始点云信息，对每周期点云按线序排列（原始信息是混乱的）。需要计算angle俯仰角和ori偏角，angle负责得出该点云的竖直方向的线序，ori负责的出点云的说平偏转度，两者组合成intensity。处理后的每个点云都有x,y,z,intensity四个信息。">
+<meta property="og:description" content="pytorch基础自定义块12345678910111213import torchfrom torch import nnfrom torch.nn import functional as Fclass MLP(nn.Module):    def __init__(self):        super().__init__()        self.hidden &#x3D; nn.Linear(">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/img/A_LOAM1.png">
-<meta property="og:image" content="http://example.com/img/A_LOAM2.png">
-<meta property="og:image" content="http://example.com/img/A_LOAM3.png">
-<meta property="article:published_time" content="2025-08-16T06:03:33.000Z">
-<meta property="article:modified_time" content="2025-08-16T16:14:58.161Z">
+<meta property="article:published_time" content="2025-08-17T02:12:10.000Z">
+<meta property="article:modified_time" content="2025-08-17T03:19:53.076Z">
 <meta property="article:author" content="ZF ZHAO">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/img/A_LOAM1.png">
   
   
   
-  <title>LOAM代码笔记 - ZF ZHAO</title>
+  <title>pytorch基础 - ZF ZHAO</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -214,7 +210,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="LOAM代码笔记"></span>
+            <span id="subtitle" data-typed-text="pytorch基础"></span>
           
         </div>
 
@@ -225,8 +221,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-08-16 14:03" pubdate>
-          2025年8月16日 下午
+        <time datetime="2025-08-17 10:12" pubdate>
+          2025年8月17日 上午
         </time>
       </span>
     
@@ -237,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          464 字
+          599 字
         
       </span>
     
@@ -248,7 +244,7 @@
         
         
         
-          4 分钟
+          5 分钟
         
       </span>
     
@@ -285,29 +281,49 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">LOAM代码笔记</h1>
+            <h1 id="seo-header">pytorch基础</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="LOAM代码笔记"><a href="#LOAM代码笔记" class="headerlink" title="LOAM代码笔记"></a>LOAM代码笔记</h1><h2 id="scanRegistration-cpp"><a href="#scanRegistration-cpp" class="headerlink" title="scanRegistration.cpp"></a><strong>scanRegistration.cpp</strong></h2><h3 id="目的："><a href="#目的：" class="headerlink" title="目的："></a>目的：</h3><p>实现激光点云的配准，主要包括点云的预处理、特征提取和配准过程。</p>
-<h3 id="功能："><a href="#功能：" class="headerlink" title="功能："></a>功能：</h3><ol>
-<li>订阅原始点云信息，对每周期点云按线序排列（原始信息是混乱的）。需要计算angle俯仰角和ori偏角，angle负责得出该点云的竖直方向的线序，ori负责的出点云的说平偏转度，两者组合成intensity。处理后的每个点云都有x,y,z,intensity四个信息。</li>
-<li>对每周期点云进行特征提取，包括提取角点和面点。计算曲率cloudCurvature，根据曲率判断是否为角点或面点。</li>
-<li>发布处理后的点云信息，包括角点和面点。<br><img src="/img/A_LOAM1.png" srcset="/img/loading.gif" lazyload alt="流程整理"></li>
+                <h1 id="pytorch基础"><a href="#pytorch基础" class="headerlink" title="pytorch基础"></a>pytorch基础</h1><h2 id="自定义块"><a href="#自定义块" class="headerlink" title="自定义块"></a>自定义块</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs haskell"><span class="hljs-keyword">import</span> torch<br><span class="hljs-title">from</span> torch <span class="hljs-keyword">import</span> nn<br><span class="hljs-title">from</span> torch.nn <span class="hljs-keyword">import</span> functional <span class="hljs-keyword">as</span> F<br><span class="hljs-class"></span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-type">MLP</span>(<span class="hljs-title">nn</span>.<span class="hljs-type">Module</span>):</span><br><span class="hljs-class">    def __init__(<span class="hljs-title">self</span>):</span><br><span class="hljs-class">        super().__init__()</span><br><span class="hljs-class">        self.hidden = nn.<span class="hljs-type">Linear</span>(20, 256)</span><br><span class="hljs-class">        self.out = nn.<span class="hljs-type">Linear</span>(256, 10)</span><br><span class="hljs-class"> </span><br><span class="hljs-class">    def forward(<span class="hljs-title">self</span>, <span class="hljs-type">X</span>):</span><br><span class="hljs-class">        return self.out(<span class="hljs-type">F</span>.<span class="hljs-title">relu</span>(<span class="hljs-title">self</span>.<span class="hljs-title">hidden</span>(<span class="hljs-type">X</span>)))</span><br><span class="hljs-class"></span><br></code></pre></td></tr></table></figure>
+
+<h2 id="参数管理"><a href="#参数管理" class="headerlink" title="参数管理"></a>参数管理</h2><p>将神经网络（nn.Module）看作是一个参数容器，它包含了所有的参数（权重和偏置），以及一些方法（如前向传播）。</p>
+<ol>
+<li>参数访问<ul>
+<li><code>net.state_dict()</code>：返回一个字典，包含了模型的所有参数（权重和偏置），还可以利用net[n]来提取第n层的参数</li>
+<li><code>net[n].weight</code>：第n层的权重，<code>net[n].weight.data</code>：第n层的权重数据</li>
+<li><code>net[n].bias</code>：第n层的偏置，<code>net[n].bias.data</code>：第n层的偏置数据</li>
+<li><code>net.parameters()</code>：返回一个迭代器，包含了模型的所有参数</li>
+</ul>
+</li>
+<li>参数初始化 <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs scss">def <span class="hljs-built_in">init_normal</span>(m):<br>    if <span class="hljs-built_in">type</span>(m) == nn.Linear:<br>        nn.init.<span class="hljs-built_in">normal_</span>(m.weight, mean=<span class="hljs-number">0</span>, std=<span class="hljs-number">0.01</span>)<br>        nn.init.<span class="hljs-built_in">zeros_</span>(m.bias)<br><br>net.<span class="hljs-built_in">apply</span>(init_normal)#遍历所有层，对每个层应用init_normal函数<br></code></pre></td></tr></table></figure>
+ <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs scss">def <span class="hljs-built_in">init_constant</span>(m):<br>    if <span class="hljs-built_in">type</span>(m) == nn.Linear:<br>        nn.init.<span class="hljs-built_in">constant_</span>(m.weight, <span class="hljs-number">1</span>)<br>        nn.init.<span class="hljs-built_in">zeros_</span>(m.bias)<br><br>net.<span class="hljs-built_in">apply</span>(init_constant)<br></code></pre></td></tr></table></figure>
+ 可以对不同层应用不同的初始化函数： <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs scss">def <span class="hljs-built_in">init_xavier</span>(m):<br>    if <span class="hljs-built_in">type</span>(m) == nn.Linear:<br>        nn.init.<span class="hljs-built_in">xavier_uniform_</span>(m.weight)<br>        nn.init.<span class="hljs-built_in">zeros_</span>(m.bias)<br><br>def <span class="hljs-built_in">init_42</span>(m):<br>    if <span class="hljs-built_in">type</span>(m) == nn.Linear:<br>        nn.init.<span class="hljs-built_in">constant_</span>(m.weight, <span class="hljs-number">42</span>)<br>        nn.init.<span class="hljs-built_in">zeros_</span>(m.bias)<br>net[<span class="hljs-number">0</span>].<span class="hljs-built_in">apply</span>(init_xavier)<br>net[<span class="hljs-number">1</span>].<span class="hljs-built_in">apply</span>(init_42)<br></code></pre></td></tr></table></figure></li>
+<li>参数绑定 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs stylus">shared = nn<span class="hljs-selector-class">.Linear</span>(<span class="hljs-number">8</span>, <span class="hljs-number">8</span>)<br>net = nn<span class="hljs-selector-class">.Sequential</span>(nn<span class="hljs-selector-class">.Linear</span>(<span class="hljs-number">4</span>, <span class="hljs-number">8</span>), nn<span class="hljs-selector-class">.ReLU</span>(),<br>                    shared, nn<span class="hljs-selector-class">.ReLU</span>(),<br>                    shared, nn<span class="hljs-selector-class">.ReLU</span>(),<br>                    nn<span class="hljs-selector-class">.Linear</span>(<span class="hljs-number">8</span>, <span class="hljs-number">1</span>))<br></code></pre></td></tr></table></figure>
+ shared层的参数在不同层之间共享，即shared层的参数在不同层之间是指向同一个内存地址的</li>
 </ol>
-<h2 id="laserOdometry-cpp"><a href="#laserOdometry-cpp" class="headerlink" title="laserOdometry.cpp"></a><strong>laserOdometry.cpp</strong></h2><h3 id="目的：-1"><a href="#目的：-1" class="headerlink" title="目的："></a>目的：</h3><p>通过读取scanRegistration.cpp中的信息来计算帧与帧之间的变化，最终得到里程计坐标系下的激光雷达的位姿。(前端激光里程计和位姿粗估计)</p>
-<h3 id="功能：-1"><a href="#功能：-1" class="headerlink" title="功能："></a>功能：</h3><ol>
-<li>订阅scanRegistration.cpp中的信息，包括角点和面点。<br>2.判断数据是否异常</li>
-<li>将当前帧映射到上一帧，需要求解变换矩阵。<br><strong>偏原理的优化部分没太看懂，需要看一下论文再去找对应部分</strong></li>
-<li>发布位姿（激光里程计）<br><img src="/img/A_LOAM2.png" srcset="/img/loading.gif" lazyload alt="流程整理"></li>
+<h2 id="自定义层"><a href="#自定义层" class="headerlink" title="自定义层"></a>自定义层</h2><p>可以把层作为组件嵌套进更复杂的模型</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyLinear</span>(nn.<span class="hljs-title class_">Module</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params"><span class="hljs-variable language_">self</span></span>):<br>        <span class="hljs-variable language_">super</span>().__init__()<br>        <br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">forward</span>(<span class="hljs-params"><span class="hljs-variable language_">self</span>, X</span>):<br>        <span class="hljs-keyword">return</span> X - X.mean()<br></code></pre></td></tr></table></figure>
+<p>带参数的层：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyLinear</span>(nn.<span class="hljs-title class_">Module</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params"><span class="hljs-variable language_">self</span>, in_features, out_features</span>):<br>        <span class="hljs-variable language_">super</span>().__init__()<br>        <span class="hljs-variable language_">self</span>.weight = nn.<span class="hljs-title class_">Parameter</span>(torch.randn(in_features, out_features))<br>        <span class="hljs-variable language_">self</span>.bias = nn.<span class="hljs-title class_">Parameter</span>(torch.zeros(out_features))<br>        <br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">forward</span>(<span class="hljs-params"><span class="hljs-variable language_">self</span>, X</span>):<br>        <span class="hljs-keyword">return</span> X @ <span class="hljs-variable language_">self</span>.weight + <span class="hljs-variable language_">self</span>.bias<br></code></pre></td></tr></table></figure>
+<p>自定义模型：</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs haskell"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-type">MyMLP</span>(<span class="hljs-title">nn</span>.<span class="hljs-type">Module</span>):</span><br><span class="hljs-class">    def __init__(<span class="hljs-title">self</span>):</span><br><span class="hljs-class">        super().__init__()</span><br><span class="hljs-class">        self.linear = <span class="hljs-type">MyLinear</span>(20, 256)</span><br><span class="hljs-class">        self.out = nn.<span class="hljs-type">Linear</span>(256, 10)</span><br><span class="hljs-class"></span><br><span class="hljs-class">    def forward(<span class="hljs-title">self</span>, <span class="hljs-type">X</span>):   </span><br><span class="hljs-class">        <span class="hljs-type">X</span> = self.linear(<span class="hljs-type">X</span>)  </span><br><span class="hljs-class">        return self.out(<span class="hljs-type">F</span>.<span class="hljs-title">relu</span>(<span class="hljs-type">X</span>))</span><br><span class="hljs-class">        # return self.out(<span class="hljs-type">X</span>)</span><br><span class="hljs-class">net = <span class="hljs-type">MyMLP</span>()</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="保存与加载"><a href="#保存与加载" class="headerlink" title="保存与加载"></a>保存与加载</h2><ol>
+<li>加载和保存模型参数<ul>
+<li><code>torch.save(net.state_dict(), &#39;net.params&#39;)</code>：保存模型参数</li>
+<li><code>net.load_state_dict(torch.load(&#39;net.params&#39;))</code>：加载模型参数</li>
+</ul>
+</li>
+<li>加载和保存整个模型<ul>
+<li><code>torch.save(net, &#39;net.pt&#39;)</code>：保存整个模型</li>
+<li><code>net = torch.load(&#39;net.pt&#39;)</code>：加载整个模型</li>
+<li><code>net.eval()</code>：将模型设置为评估模式，即关闭dropout和batch normalization等层的训练模式</li>
+<li><code>net.train()</code>：将模型设置为训练模式，即开启dropout和batch normalization等层的训练模式</li>
+</ul>
+</li>
 </ol>
-<h2 id="laserMapping-cpp"><a href="#laserMapping-cpp" class="headerlink" title="laserMapping.cpp"></a><strong>laserMapping.cpp</strong></h2><h3 id="目的：-2"><a href="#目的：-2" class="headerlink" title="目的："></a>目的：</h3><p>通过已经获得的激光里程计信息来消除激光里程计和地图之间的误差（也就是累计的误差），使得最终的姿态都是关于世界坐标的，并建图</p>
-<h3 id="理解"><a href="#理解" class="headerlink" title="理解:"></a>理解:</h3><ol>
-<li>先创建一个21<em>21</em>1的大空间，每次只关注自身周围的5<em>5</em>1的小空间。<br>2.可以通过大地图的动态调整，来使得小地图处于大地图的中心位置。</li>
-<li>之后的数学计算不太理解，需要看一下论文再去找对应部分。</li>
-</ol>
-<p><img src="/img/A_LOAM3.png" srcset="/img/loading.gif" lazyload alt="流程介绍"></p>
 
                 
               </div>
@@ -326,15 +342,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/SLAM/" class="category-chain-item">SLAM</a>
+  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="category-chain-item">深度学习</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/SLAM/LOAM/" class="category-chain-item">LOAM</a>
-  
-  
-
   
 
       </span>
@@ -353,8 +362,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>LOAM代码笔记</div>
-      <div>http://example.com/2025/08/16/25_08_16LOAM代码笔记/</div>
+      <div>pytorch基础</div>
+      <div>http://example.com/2025/08/17/25_08_17pytorch基础/</div>
     </div>
     <div class="license-meta">
       
@@ -366,7 +375,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年8月16日</div>
+          <div>2025年8月17日</div>
         </div>
       
       
@@ -398,9 +407,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/08/17/25_08_17pytorch%E5%9F%BA%E7%A1%80/" title="pytorch基础">
+                      <a href="/2025/08/17/25_08_17%E5%8D%B7%E7%A7%AF%E5%B1%82/" title="卷积层">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">pytorch基础</span>
+                        <span class="hidden-mobile">卷积层</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -408,8 +417,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/08/16/25_08_16%E4%B8%A2%E5%BC%83%E6%B3%95/" title="丢弃法  正则化">
-                        <span class="hidden-mobile">丢弃法  正则化</span>
+                      <a href="/2025/08/16/25_08_16LOAM%E4%BB%A3%E7%A0%81%E7%AC%94%E8%AE%B0/" title="LOAM代码笔记">
+                        <span class="hidden-mobile">LOAM代码笔记</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
