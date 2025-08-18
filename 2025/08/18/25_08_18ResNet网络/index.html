@@ -19,23 +19,24 @@
   <meta name="author" content="ZF ZHAO">
   <meta name="keywords" content="">
   
-    <meta name="description" content="GoogleNetInception模块多个路径从不同·层面抽取信息，然后在输出通道合并，即使不同路径的输出通道数不同，也可以通过1*1卷积层来进行通道数的匹配。 网络结构">
+    <meta name="description" content="ResNet前言问题：随着网络层数的增加，模型的性能会出现饱和甚至下降,增加更多的层反而不能增加精度想法：使得每一层都包含之前层的信息，从而避免信息丢失，即使深度加深，可以保证精度不会下降太多 残差块将本次输入加到本次输出中 ResNet块残差块可以进行替换组合">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GoogleNet网络">
-<meta property="og:url" content="http://example.com/2025/08/18/25_08_18GoogleNet%E7%BD%91%E7%BB%9C/index.html">
+<meta property="og:title" content="ResNet网络">
+<meta property="og:url" content="http://example.com/2025/08/18/25_08_18ResNet%E7%BD%91%E7%BB%9C/index.html">
 <meta property="og:site_name" content="ZF ZHAO">
-<meta property="og:description" content="GoogleNetInception模块多个路径从不同·层面抽取信息，然后在输出通道合并，即使不同路径的输出通道数不同，也可以通过1*1卷积层来进行通道数的匹配。 网络结构">
+<meta property="og:description" content="ResNet前言问题：随着网络层数的增加，模型的性能会出现饱和甚至下降,增加更多的层反而不能增加精度想法：使得每一层都包含之前层的信息，从而避免信息丢失，即使深度加深，可以保证精度不会下降太多 残差块将本次输入加到本次输出中 ResNet块残差块可以进行替换组合">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/img/GoogleNet%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84.png">
-<meta property="article:published_time" content="2025-08-18T04:54:42.000Z">
-<meta property="article:modified_time" content="2025-08-18T05:05:34.802Z">
+<meta property="og:image" content="http://example.com/img/%E6%AE%8B%E5%B7%AE%E5%9D%97.png">
+<meta property="og:image" content="http://example.com/img/ResNet%E5%9D%97.png">
+<meta property="article:published_time" content="2025-08-18T13:44:56.000Z">
+<meta property="article:modified_time" content="2025-08-18T13:52:29.905Z">
 <meta property="article:author" content="ZF ZHAO">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/img/GoogleNet%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84.png">
+<meta name="twitter:image" content="http://example.com/img/%E6%AE%8B%E5%B7%AE%E5%9D%97.png">
   
   
   
-  <title>GoogleNet网络 - ZF ZHAO</title>
+  <title>ResNet网络 - ZF ZHAO</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -212,7 +213,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="GoogleNet网络"></span>
+            <span id="subtitle" data-typed-text="ResNet网络"></span>
           
         </div>
 
@@ -223,8 +224,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-08-18 12:54" pubdate>
-          2025年8月18日 下午
+        <time datetime="2025-08-18 21:44" pubdate>
+          2025年8月18日 晚上
         </time>
       </span>
     
@@ -235,7 +236,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          62 字
+          112 字
         
       </span>
     
@@ -283,13 +284,14 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">GoogleNet网络</h1>
+            <h1 id="seo-header">ResNet网络</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="GoogleNet"><a href="#GoogleNet" class="headerlink" title="GoogleNet"></a>GoogleNet</h1><h2 id="Inception模块"><a href="#Inception模块" class="headerlink" title="Inception模块"></a>Inception模块</h2><p>多个路径从不同·层面抽取信息，然后在输出通道合并，即使不同路径的输出通道数不同，也可以通过1*1卷积层来进行通道数的匹配。</p>
-<h2 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h2><p><img src="/img/GoogleNet%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84.png" srcset="/img/loading.gif" lazyload alt="GoogleNet网络结构"></p>
+                <h1 id="ResNet"><a href="#ResNet" class="headerlink" title="ResNet"></a>ResNet</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>问题：随着网络层数的增加，模型的性能会出现饱和甚至下降,增加更多的层反而不能增加精度<br>想法：<br>使得每一层都包含之前层的信息，从而避免信息丢失，即使深度加深，可以保证精度不会下降太多</p>
+<h2 id="残差块"><a href="#残差块" class="headerlink" title="残差块"></a>残差块</h2><p>将本次输入加到本次输出中<br><img src="/img/%E6%AE%8B%E5%B7%AE%E5%9D%97.png" srcset="/img/loading.gif" lazyload alt="残差块"></p>
+<h2 id="ResNet块"><a href="#ResNet块" class="headerlink" title="ResNet块"></a>ResNet块</h2><p><img src="/img/ResNet%E5%9D%97.png" srcset="/img/loading.gif" lazyload alt="ResNet块"><br>残差块可以进行替换组合</p>
 
                 
               </div>
@@ -335,8 +337,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>GoogleNet网络</div>
-      <div>http://example.com/2025/08/18/25_08_18GoogleNet网络/</div>
+      <div>ResNet网络</div>
+      <div>http://example.com/2025/08/18/25_08_18ResNet网络/</div>
     </div>
     <div class="license-meta">
       
@@ -380,18 +382,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/08/18/25_08_18%E6%89%B9%E9%87%8F%E5%BD%92%E4%B8%80%E5%8C%96/" title="批量归一化">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">批量归一化</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/08/18/25_08_18NiN%E7%BD%91%E7%BB%9C/" title="NiN网络">
-                        <span class="hidden-mobile">NiN网络</span>
+                      <a href="/2025/08/18/25_08_18%E6%89%B9%E9%87%8F%E5%BD%92%E4%B8%80%E5%8C%96/" title="批量归一化">
+                        <span class="hidden-mobile">批量归一化</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
