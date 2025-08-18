@@ -19,23 +19,21 @@
   <meta name="author" content="ZF ZHAO">
   <meta name="keywords" content="">
   
-    <meta name="description" content="LOAM: Lidar Odometry and Mapping in Real-time 笔记论文概述实时性的位姿估计定位和建图算法，既有高频率低精度里程计进行运动估计，又有低频率高精度点云匹配来地图建图。 算法一  LIDAR ODOMETRY 特征点匹配：通过计算曲率c来判断点是否为角点或面点。在c的计算中引入S来消除距离影响，将每一次扫描分成多个相同的子区域，保证特征点的均匀分布。还要注意">
+    <meta name="description" content="池化层前言卷积对位置信息的敏感度较高，而池化层对位置信息的敏感度较低。池化层的作用是降低卷积层的敏感度，减少计算量，防止过拟合。 池化方式 最大池化: 取池化窗口内的最大值作为输出。 平均池化: 取池化窗口内的平均值作为输出。  代码实现123456789101112131415import torchfrom torch import nnfrom d2l import torch as d2l">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LOAM论文笔记">
-<meta property="og:url" content="http://example.com/2025/08/18/25_08_18LOAM%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:title" content="池化层">
+<meta property="og:url" content="http://example.com/2025/08/18/25_08_18%E6%B1%A0%E5%8C%96%E5%B1%82/index.html">
 <meta property="og:site_name" content="ZF ZHAO">
-<meta property="og:description" content="LOAM: Lidar Odometry and Mapping in Real-time 笔记论文概述实时性的位姿估计定位和建图算法，既有高频率低精度里程计进行运动估计，又有低频率高精度点云匹配来地图建图。 算法一  LIDAR ODOMETRY 特征点匹配：通过计算曲率c来判断点是否为角点或面点。在c的计算中引入S来消除距离影响，将每一次扫描分成多个相同的子区域，保证特征点的均匀分布。还要注意">
+<meta property="og:description" content="池化层前言卷积对位置信息的敏感度较高，而池化层对位置信息的敏感度较低。池化层的作用是降低卷积层的敏感度，减少计算量，防止过拟合。 池化方式 最大池化: 取池化窗口内的最大值作为输出。 平均池化: 取池化窗口内的平均值作为输出。  代码实现123456789101112131415import torchfrom torch import nnfrom d2l import torch as d2l">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/img/LOAM%E4%BC%AA%E4%BB%A3%E7%A0%811.png">
-<meta property="article:published_time" content="2025-08-17T16:46:40.000Z">
-<meta property="article:modified_time" content="2025-08-17T17:06:10.836Z">
+<meta property="article:published_time" content="2025-08-18T01:46:45.000Z">
+<meta property="article:modified_time" content="2025-08-18T01:57:31.363Z">
 <meta property="article:author" content="ZF ZHAO">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/img/LOAM%E4%BC%AA%E4%BB%A3%E7%A0%811.png">
   
   
   
-  <title>LOAM论文笔记 - ZF ZHAO</title>
+  <title>池化层 - ZF ZHAO</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -212,7 +210,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="LOAM论文笔记"></span>
+            <span id="subtitle" data-typed-text="池化层"></span>
           
         </div>
 
@@ -223,8 +221,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-08-18 00:46" pubdate>
-          2025年8月18日 凌晨
+        <time datetime="2025-08-18 09:46" pubdate>
+          2025年8月18日 上午
         </time>
       </span>
     
@@ -235,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          365 字
+          164 字
         
       </span>
     
@@ -246,7 +244,7 @@
         
         
         
-          4 分钟
+          2 分钟
         
       </span>
     
@@ -283,29 +281,19 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">LOAM论文笔记</h1>
+            <h1 id="seo-header">池化层</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="LOAM-Lidar-Odometry-and-Mapping-in-Real-time-笔记"><a href="#LOAM-Lidar-Odometry-and-Mapping-in-Real-time-笔记" class="headerlink" title="LOAM: Lidar Odometry and Mapping in Real-time 笔记"></a>LOAM: Lidar Odometry and Mapping in Real-time 笔记</h1><h2 id="论文概述"><a href="#论文概述" class="headerlink" title="论文概述"></a>论文概述</h2><p>实时性的位姿估计定位和建图算法，既有高频率低精度里程计进行运动估计，又有低频率高精度点云匹配来地图建图。</p>
-<h2 id="算法一-LIDAR-ODOMETRY"><a href="#算法一-LIDAR-ODOMETRY" class="headerlink" title="算法一  LIDAR ODOMETRY"></a>算法一  LIDAR ODOMETRY</h2><ol>
-<li><strong>特征点匹配</strong>：通过计算曲率c来判断点是否为角点或面点。在c的计算中引入S来消除距离影响，将每一次扫描分成多个相同的子区域，保证特征点的均匀分布。还要注意排除几种特殊情况。</li>
-<li><strong>寻找对应特征点集合</strong>：<ul>
-<li>先将前一时刻的点云投影到当前时刻。</li>
-<li>利用两个时刻的点云信息来进行角点和面点的匹配，使用最近邻搜索相邻特征点，角点进行点到直线的距离计算，面点进行点到平面的距离计算。</li>
-</ul>
-</li>
-<li><strong>运动动作估计</strong>：<ul>
-<li>通过角点和面点的匹配来计算变换矩阵T。</li>
-<li>知道在一段时间内的变化矩阵T,假设运动是均匀的，可以利用时间进行线性插值，得到当前时刻的变换矩阵T。</li>
-<li>利用变换矩阵T来根据投影量更新当前时刻的点云坐标。</li>
-<li>进而将该特征点的距离公式作为损失函数，利用优化算法来求解变换矩阵T，使得距离趋近于0.</li>
-</ul>
-</li>
-<li><strong>伪代码</strong><br><img src="/img/LOAM%E4%BC%AA%E4%BB%A3%E7%A0%811.png" srcset="/img/loading.gif" lazyload alt="伪代码"></li>
+                <h1 id="池化层"><a href="#池化层" class="headerlink" title="池化层"></a>池化层</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>卷积对位置信息的敏感度较高，而池化层对位置信息的敏感度较低。<br>池化层的作用是降低卷积层的敏感度，减少计算量，防止过拟合。</p>
+<h2 id="池化方式"><a href="#池化方式" class="headerlink" title="池化方式"></a>池化方式</h2><ol>
+<li><strong>最大池化</strong>: 取池化窗口内的最大值作为输出。</li>
+<li><strong>平均池化</strong>: 取池化窗口内的平均值作为输出。</li>
 </ol>
-<h2 id="算法二-LIDAR-MAPPING"><a href="#算法二-LIDAR-MAPPING" class="headerlink" title="算法二  LIDAR MAPPING"></a>算法二  LIDAR MAPPING</h2>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> torch<br><span class="hljs-keyword">from</span> torch <span class="hljs-keyword">import</span> nn<br><span class="hljs-keyword">from</span> d2l <span class="hljs-keyword">import</span> torch <span class="hljs-keyword">as</span> d2l<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">pool2d</span>(<span class="hljs-params">X, pool_size, mode = <span class="hljs-string">&#x27;max&#x27;</span></span>):<br>    p_h, p_w = pool_size<br>    Y = torch.zeros((X.shape[<span class="hljs-number">0</span>] - p_h + <span class="hljs-number">1</span>, X.shape[<span class="hljs-number">1</span>] - p_w + <span class="hljs-number">1</span>))<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(Y.shape[<span class="hljs-number">0</span>]):<br>        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(Y.shape[<span class="hljs-number">1</span>]):<br>            <span class="hljs-keyword">if</span> mode == <span class="hljs-string">&#x27;max&#x27;</span>:<br>                Y[i,j] = X[i:i+p_h,j:j+p_w].<span class="hljs-built_in">max</span>()<br>            <span class="hljs-keyword">elif</span> mode == <span class="hljs-string">&#x27;avg&#x27;</span>:<br>                Y[i,j] = X[i:i+p_h,j:j+p_w].mean()<br>    <span class="hljs-keyword">return</span> Y<br><br></code></pre></td></tr></table></figure>
+
+
                 
               </div>
             
@@ -323,15 +311,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/SLAM/" class="category-chain-item">SLAM</a>
+  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="category-chain-item">深度学习</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/SLAM/LOAM/" class="category-chain-item">LOAM</a>
-  
-  
-
   
 
       </span>
@@ -350,8 +331,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>LOAM论文笔记</div>
-      <div>http://example.com/2025/08/18/25_08_18LOAM论文笔记/</div>
+      <div>池化层</div>
+      <div>http://example.com/2025/08/18/25_08_18池化层/</div>
     </div>
     <div class="license-meta">
       
@@ -395,18 +376,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/08/18/25_08_18%E6%B1%A0%E5%8C%96%E5%B1%82/" title="池化层">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">池化层</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/08/17/25_08_17%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E5%8F%98%E6%8D%A2%EF%BC%8C%E5%B8%A6%E9%80%9A%E6%BB%A4%E6%B3%A2%E5%99%A8%E5%8F%98%E6%8D%A2%E6%89%8B%E7%A8%BF%E6%95%B4%E7%90%86/" title="拉普拉斯变换，带通滤波器变换手稿整理">
-                        <span class="hidden-mobile">拉普拉斯变换，带通滤波器变换手稿整理</span>
+                      <a href="/2025/08/18/25_08_18LOAM%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" title="LOAM论文笔记">
+                        <span class="hidden-mobile">LOAM论文笔记</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
