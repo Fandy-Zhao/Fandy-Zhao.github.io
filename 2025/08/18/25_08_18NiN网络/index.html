@@ -19,21 +19,23 @@
   <meta name="author" content="ZF ZHAO">
   <meta name="keywords" content="">
   
-    <meta name="description" content="池化层前言卷积对位置信息的敏感度较高，而池化层对位置信息的敏感度较低。池化层的作用是降低卷积层的敏感度，减少计算量，防止过拟合。 池化方式 最大池化: 取池化窗口内的最大值作为输出。 平均池化: 取池化窗口内的平均值作为输出。  代码实现123456789101112131415import torchfrom torch import nnfrom d2l import torch as d2l">
+    <meta name="description" content="NiN前言问题：对于全连接层，在卷积层之后的第一个全连接层的输入通道数是非常大的，这个时候如果使用全连接层，会导致参数数量非常多，从而导致模型的过拟合。 NiN网络NiN块 一个卷积层后跟两个全连接层 全连接层：1*1卷积层  架构 无全连接层 交替使用NiN块和步幅为2的最大池化层（逐步减小高宽和增大通道数） 最后使用全局平均池化层的到输出（输入通道是类别数）  代码import torchfr">
 <meta property="og:type" content="article">
-<meta property="og:title" content="池化层">
-<meta property="og:url" content="http://example.com/2025/08/18/25_08_18%E6%B1%A0%E5%8C%96%E5%B1%82/index.html">
+<meta property="og:title" content="NiN网络">
+<meta property="og:url" content="http://example.com/2025/08/18/25_08_18NiN%E7%BD%91%E7%BB%9C/index.html">
 <meta property="og:site_name" content="ZF ZHAO">
-<meta property="og:description" content="池化层前言卷积对位置信息的敏感度较高，而池化层对位置信息的敏感度较低。池化层的作用是降低卷积层的敏感度，减少计算量，防止过拟合。 池化方式 最大池化: 取池化窗口内的最大值作为输出。 平均池化: 取池化窗口内的平均值作为输出。  代码实现123456789101112131415import torchfrom torch import nnfrom d2l import torch as d2l">
+<meta property="og:description" content="NiN前言问题：对于全连接层，在卷积层之后的第一个全连接层的输入通道数是非常大的，这个时候如果使用全连接层，会导致参数数量非常多，从而导致模型的过拟合。 NiN网络NiN块 一个卷积层后跟两个全连接层 全连接层：1*1卷积层  架构 无全连接层 交替使用NiN块和步幅为2的最大池化层（逐步减小高宽和增大通道数） 最后使用全局平均池化层的到输出（输入通道是类别数）  代码import torchfr">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-08-18T01:46:45.000Z">
-<meta property="article:modified_time" content="2025-08-18T01:57:31.363Z">
+<meta property="og:image" content="http://example.com/img/NiN%E6%9E%B6%E6%9E%84.png">
+<meta property="article:published_time" content="2025-08-18T04:08:14.000Z">
+<meta property="article:modified_time" content="2025-08-18T04:47:14.693Z">
 <meta property="article:author" content="ZF ZHAO">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/NiN%E6%9E%B6%E6%9E%84.png">
   
   
   
-  <title>池化层 - ZF ZHAO</title>
+  <title>NiN网络 - ZF ZHAO</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -210,7 +212,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="池化层"></span>
+            <span id="subtitle" data-typed-text="NiN网络"></span>
           
         </div>
 
@@ -221,8 +223,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-08-18 09:46" pubdate>
-          2025年8月18日 上午
+        <time datetime="2025-08-18 12:08" pubdate>
+          2025年8月18日 中午
         </time>
       </span>
     
@@ -233,7 +235,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          164 字
+          367 字
         
       </span>
     
@@ -244,7 +246,7 @@
         
         
         
-          2 分钟
+          4 分钟
         
       </span>
     
@@ -281,19 +283,23 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">池化层</h1>
+            <h1 id="seo-header">NiN网络</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="池化层"><a href="#池化层" class="headerlink" title="池化层"></a>池化层</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>卷积对位置信息的敏感度较高，而池化层对位置信息的敏感度较低。<br>池化层的作用是降低卷积层的敏感度，减少计算量，防止过拟合。</p>
-<h2 id="池化方式"><a href="#池化方式" class="headerlink" title="池化方式"></a>池化方式</h2><ol>
-<li><strong>最大池化</strong>: 取池化窗口内的最大值作为输出。</li>
-<li><strong>平均池化</strong>: 取池化窗口内的平均值作为输出。</li>
+                <h1 id="NiN"><a href="#NiN" class="headerlink" title="NiN"></a>NiN</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>问题：对于全连接层，在卷积层之后的第一个全连接层的输入通道数是非常大的，这个时候如果使用全连接层，会导致参数数量非常多，从而导致模型的过拟合。</p>
+<h2 id="NiN网络"><a href="#NiN网络" class="headerlink" title="NiN网络"></a>NiN网络</h2><h3 id="NiN块"><a href="#NiN块" class="headerlink" title="NiN块"></a>NiN块</h3><ul>
+<li>一个卷积层后跟两个全连接层</li>
+<li>全连接层：1*1卷积层</li>
+</ul>
+<h3 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h3><ol>
+<li>无全连接层</li>
+<li>交替使用NiN块和步幅为2的最大池化层（逐步减小高宽和增大通道数）</li>
+<li>最后使用全局平均池化层的到输出（输入通道是类别数）<br><img src="/img/NiN%E6%9E%B6%E6%9E%84.png" srcset="/img/loading.gif" lazyload alt="NiN架构"></li>
 </ol>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> torch<br><span class="hljs-keyword">from</span> torch <span class="hljs-keyword">import</span> nn<br><span class="hljs-keyword">from</span> d2l <span class="hljs-keyword">import</span> torch <span class="hljs-keyword">as</span> d2l<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">pool2d</span>(<span class="hljs-params">X, pool_size, mode = <span class="hljs-string">&#x27;max&#x27;</span></span>):<br>    p_h, p_w = pool_size<br>    Y = torch.zeros((X.shape[<span class="hljs-number">0</span>] - p_h + <span class="hljs-number">1</span>, X.shape[<span class="hljs-number">1</span>] - p_w + <span class="hljs-number">1</span>))<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(Y.shape[<span class="hljs-number">0</span>]):<br>        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(Y.shape[<span class="hljs-number">1</span>]):<br>            <span class="hljs-keyword">if</span> mode == <span class="hljs-string">&#x27;max&#x27;</span>:<br>                Y[i,j] = X[i:i+p_h,j:j+p_w].<span class="hljs-built_in">max</span>()<br>            <span class="hljs-keyword">elif</span> mode == <span class="hljs-string">&#x27;avg&#x27;</span>:<br>                Y[i,j] = X[i:i+p_h,j:j+p_w].mean()<br>    <span class="hljs-keyword">return</span> Y<br><br></code></pre></td></tr></table></figure>
-
-
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>import torch<br>from torch import nn<br>from d2l import torch as d2l</p>
+<h1 id="定义NiN块"><a href="#定义NiN块" class="headerlink" title="定义NiN块"></a>定义NiN块</h1><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs routeros">def nin_block(in_channels, out_channels, kernel_size, <span class="hljs-attribute">stride</span>=1, <span class="hljs-attribute">padding</span>=0):<br>    return nn.Sequential(<br>        nn.Conv2d(in_channels, out_channels, kernel_size, stride, padding),<br>        nn.ReLU(),<br>        nn.Conv2d(out_channels, out_channels, <span class="hljs-attribute">kernel_size</span>=1),  # 1x1卷积<br>        nn.ReLU(),<br>        nn.Conv2d(out_channels, out_channels, <span class="hljs-attribute">kernel_size</span>=1),  # 1x1卷积<br>        nn.ReLU()<br>    )<br><br><br>def nin(<span class="hljs-attribute">num_classes</span>=10):<br>    return nn.Sequential(<br>        nin_block(1, 96, <span class="hljs-attribute">kernel_size</span>=11, <span class="hljs-attribute">stride</span>=4, <span class="hljs-attribute">padding</span>=0),  # 卷积层1<br>        nn.MaxPool2d(<span class="hljs-attribute">kernel_size</span>=3, <span class="hljs-attribute">stride</span>=2),  # 池化层1<br>        nin_block(96, 256, <span class="hljs-attribute">kernel_size</span>=5, <span class="hljs-attribute">stride</span>=1, <span class="hljs-attribute">padding</span>=2),  # 卷积层2<br>        nn.MaxPool2d(<span class="hljs-attribute">kernel_size</span>=3, <span class="hljs-attribute">stride</span>=2),  # 池化层2<br>        nin_block(256, 384, <span class="hljs-attribute">kernel_size</span>=3, <span class="hljs-attribute">stride</span>=1, <span class="hljs-attribute">padding</span>=1),  # 卷积层3<br>        nn.MaxPool2d(<span class="hljs-attribute">kernel_size</span>=3, <span class="hljs-attribute">stride</span>=2),  # 池化层3<br>        nn.Dropout(0.5),  # 丢弃层<br>        nin_block(384, 10, <span class="hljs-attribute">kernel_size</span>=3, <span class="hljs-attribute">stride</span>=1, <span class="hljs-attribute">padding</span>=1),  # 卷积层4, 输出层<br>        nn.AdaptiveAvgPool2d((1, 1)),  # 自适应平均池化<br>        nn.Flatten()  # 展平层<br>    )<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    net = nin()<br>    <br>    # 测试网络结构<br>    # X = torch.randn(1, 1, 224, 224)  # 输入图像的形状<br>    # <span class="hljs-keyword">for</span> layer <span class="hljs-keyword">in</span> net:<br>    #     X = layer(X)  # 前向传播<br>    #     <span class="hljs-built_in">print</span>(layer.__class__.__name__, <span class="hljs-string">&#x27;output shape:\t&#x27;</span>, X.shape)<br><br>    lr, num_epochs = 0.01, 10<br>    batch_size = 128<br>    train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size, <span class="hljs-attribute">resize</span>=224)<br>    d2l.train_ch6(net, train_iter, test_iter, num_epochs, lr, d2l.try_gpu())<br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -314,6 +320,13 @@
   <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="category-chain-item">深度学习</a>
   
   
+    <span>></span>
+    
+  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" class="category-chain-item">神经网络</a>
+  
+  
+
+  
 
       </span>
     
@@ -331,8 +344,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>池化层</div>
-      <div>http://example.com/2025/08/18/25_08_18池化层/</div>
+      <div>NiN网络</div>
+      <div>http://example.com/2025/08/18/25_08_18NiN网络/</div>
     </div>
     <div class="license-meta">
       
@@ -376,9 +389,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/08/18/25_08_18AlexNet%E7%BD%91%E7%BB%9C/" title="AlexNet网络">
+                      <a href="/2025/08/18/25_08_18GoogleNet%E7%BD%91%E7%BB%9C/" title="GoogleNet网络">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">AlexNet网络</span>
+                        <span class="hidden-mobile">GoogleNet网络</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -386,8 +399,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/08/18/25_08_18LOAM%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" title="LOAM论文笔记">
-                        <span class="hidden-mobile">LOAM论文笔记</span>
+                      <a href="/2025/08/18/25_08_18VGG%E7%BD%91%E7%BB%9C/" title="VGG网络">
+                        <span class="hidden-mobile">VGG网络</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

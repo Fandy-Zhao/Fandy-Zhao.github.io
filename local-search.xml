@@ -4,6 +4,90 @@
   
   
   <entry>
+    <title>GoogleNet网络</title>
+    <link href="/2025/08/18/25_08_18GoogleNet%E7%BD%91%E7%BB%9C/"/>
+    <url>/2025/08/18/25_08_18GoogleNet%E7%BD%91%E7%BB%9C/</url>
+    
+    <content type="html"><![CDATA[<h1 id="GoogleNet"><a href="#GoogleNet" class="headerlink" title="GoogleNet"></a>GoogleNet</h1>]]></content>
+    
+    
+    <categories>
+      
+      <category>深度学习</category>
+      
+      <category>神经网络</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>NiN网络</title>
+    <link href="/2025/08/18/25_08_18NiN%E7%BD%91%E7%BB%9C/"/>
+    <url>/2025/08/18/25_08_18NiN%E7%BD%91%E7%BB%9C/</url>
+    
+    <content type="html"><![CDATA[<h1 id="NiN"><a href="#NiN" class="headerlink" title="NiN"></a>NiN</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>问题：对于全连接层，在卷积层之后的第一个全连接层的输入通道数是非常大的，这个时候如果使用全连接层，会导致参数数量非常多，从而导致模型的过拟合。</p><h2 id="NiN网络"><a href="#NiN网络" class="headerlink" title="NiN网络"></a>NiN网络</h2><h3 id="NiN块"><a href="#NiN块" class="headerlink" title="NiN块"></a>NiN块</h3><ul><li>一个卷积层后跟两个全连接层</li><li>全连接层：1*1卷积层</li></ul><h3 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h3><ol><li>无全连接层</li><li>交替使用NiN块和步幅为2的最大池化层（逐步减小高宽和增大通道数）</li><li>最后使用全局平均池化层的到输出（输入通道是类别数）<br><img src="/img/NiN%E6%9E%B6%E6%9E%84.png" alt="NiN架构"></li></ol><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>import torch<br>from torch import nn<br>from d2l import torch as d2l</p><h1 id="定义NiN块"><a href="#定义NiN块" class="headerlink" title="定义NiN块"></a>定义NiN块</h1><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs routeros">def nin_block(in_channels, out_channels, kernel_size, <span class="hljs-attribute">stride</span>=1, <span class="hljs-attribute">padding</span>=0):<br>    return nn.Sequential(<br>        nn.Conv2d(in_channels, out_channels, kernel_size, stride, padding),<br>        nn.ReLU(),<br>        nn.Conv2d(out_channels, out_channels, <span class="hljs-attribute">kernel_size</span>=1),  # 1x1卷积<br>        nn.ReLU(),<br>        nn.Conv2d(out_channels, out_channels, <span class="hljs-attribute">kernel_size</span>=1),  # 1x1卷积<br>        nn.ReLU()<br>    )<br><br><br>def nin(<span class="hljs-attribute">num_classes</span>=10):<br>    return nn.Sequential(<br>        nin_block(1, 96, <span class="hljs-attribute">kernel_size</span>=11, <span class="hljs-attribute">stride</span>=4, <span class="hljs-attribute">padding</span>=0),  # 卷积层1<br>        nn.MaxPool2d(<span class="hljs-attribute">kernel_size</span>=3, <span class="hljs-attribute">stride</span>=2),  # 池化层1<br>        nin_block(96, 256, <span class="hljs-attribute">kernel_size</span>=5, <span class="hljs-attribute">stride</span>=1, <span class="hljs-attribute">padding</span>=2),  # 卷积层2<br>        nn.MaxPool2d(<span class="hljs-attribute">kernel_size</span>=3, <span class="hljs-attribute">stride</span>=2),  # 池化层2<br>        nin_block(256, 384, <span class="hljs-attribute">kernel_size</span>=3, <span class="hljs-attribute">stride</span>=1, <span class="hljs-attribute">padding</span>=1),  # 卷积层3<br>        nn.MaxPool2d(<span class="hljs-attribute">kernel_size</span>=3, <span class="hljs-attribute">stride</span>=2),  # 池化层3<br>        nn.Dropout(0.5),  # 丢弃层<br>        nin_block(384, 10, <span class="hljs-attribute">kernel_size</span>=3, <span class="hljs-attribute">stride</span>=1, <span class="hljs-attribute">padding</span>=1),  # 卷积层4, 输出层<br>        nn.AdaptiveAvgPool2d((1, 1)),  # 自适应平均池化<br>        nn.Flatten()  # 展平层<br>    )<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    net = nin()<br>    <br>    # 测试网络结构<br>    # X = torch.randn(1, 1, 224, 224)  # 输入图像的形状<br>    # <span class="hljs-keyword">for</span> layer <span class="hljs-keyword">in</span> net:<br>    #     X = layer(X)  # 前向传播<br>    #     <span class="hljs-built_in">print</span>(layer.__class__.__name__, <span class="hljs-string">&#x27;output shape:\t&#x27;</span>, X.shape)<br><br>    lr, num_epochs = 0.01, 10<br>    batch_size = 128<br>    train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size, <span class="hljs-attribute">resize</span>=224)<br>    d2l.train_ch6(net, train_iter, test_iter, num_epochs, lr, d2l.try_gpu())<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>深度学习</category>
+      
+      <category>神经网络</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>VGG网络</title>
+    <link href="/2025/08/18/25_08_18VGG%E7%BD%91%E7%BB%9C/"/>
+    <url>/2025/08/18/25_08_18VGG%E7%BD%91%E7%BB%9C/</url>
+    
+    <content type="html"><![CDATA[<h1 id="VGG"><a href="#VGG" class="headerlink" title="VGG"></a>VGG</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>AlexNet对于LeNet的提升得益于网络的更深更大，网络更深更大的方法：</p><ul><li>更多的全连接层</li><li>更多的卷积层</li><li>将卷积层分成块（VGG）</li></ul><p>和AlexNet的区别：<br>使用尺寸更小的3×3卷积核串联来替代大卷积核11×11,7×7这样的大尺寸卷积核，引入块设计思想，在相同的感受野的情况下，多个串联非线性能力更强，描述能力更强</p><h2 id="VGG思路"><a href="#VGG思路" class="headerlink" title="VGG思路"></a>VGG思路</h2><p>VGG网络的思路是将卷积层分成多个块，每个块包含多个卷积层和一个池化层，最后串联接多个全连接层。<br><img src="/img/VGG%E6%9E%B6%E6%9E%84.png" alt="VGG网络结构"></p><ul><li>VGG-16 13个卷积层与3个全连接层</li><li>VGG-19 16个卷积层与3个全连接层</li></ul><h2 id="VGG实现"><a href="#VGG实现" class="headerlink" title="VGG实现"></a>VGG实现</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs css">import torch<br><span class="hljs-selector-tag">from</span> torch import nn<br><span class="hljs-selector-tag">from</span> d2l import torch as d2l<br><br># 定义VGG块<br>def vgg_block(num_convs, in_channels, out_channels):<br>    layers = []<br>    for _ in <span class="hljs-built_in">range</span>(num_convs):<br>        layers.<span class="hljs-built_in">append</span>(nn.<span class="hljs-built_in">Conv2d</span>(in_channels, out_channels, kernel_size=<span class="hljs-number">3</span>, padding=<span class="hljs-number">1</span>))<br>        layers.<span class="hljs-built_in">append</span>(nn.<span class="hljs-built_in">ReLU</span>())<br>        in_channels = out_channels#更新输入通道数<br>    layers.<span class="hljs-built_in">append</span>(nn.<span class="hljs-built_in">MaxPool2d</span>(kernel_size=<span class="hljs-number">2</span>, stride=<span class="hljs-number">2</span>))<br>    return nn.<span class="hljs-built_in">Sequential</span>(*layers)<br><br>def <span class="hljs-built_in">vgg</span>(conv_arch, num_classes=<span class="hljs-number">10</span>):<br>    conv_blocks = []<br>    in_channels = <span class="hljs-number">1</span>  # 输入通道数<br>    for (num_convs, out_channels) in conv_arch:<br>        conv_blocks.<span class="hljs-built_in">append</span>(<span class="hljs-built_in">vgg_block</span>(num_convs, in_channels, out_channels))<br>        in_channels = out_channels<br>    return nn.<span class="hljs-built_in">Sequential</span>(<br>        #卷积单元<br>        *conv_blocks,<br>        #全连接单元<br>        nn.<span class="hljs-built_in">Flatten</span>(),<br>        nn.<span class="hljs-built_in">Linear</span>(in_channels * <span class="hljs-number">7</span> * <span class="hljs-number">7</span>, <span class="hljs-number">4096</span>),  # 假设输入图像大小为<span class="hljs-number">224</span>x224<br>        nn.<span class="hljs-built_in">ReLU</span>(),<br>        nn.<span class="hljs-built_in">Dropout</span>(<span class="hljs-number">0.5</span>),<br>        nn.<span class="hljs-built_in">Linear</span>(<span class="hljs-number">4096</span>, <span class="hljs-number">4096</span>),<br>        nn.<span class="hljs-built_in">ReLU</span>(),<br>        nn.<span class="hljs-built_in">Dropout</span>(<span class="hljs-number">0.5</span>),<br>        nn.<span class="hljs-built_in">Linear</span>(<span class="hljs-number">4096</span>, num_classes)<br>    )<br><br>if __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    conv_arch = [(<span class="hljs-number">1</span>, <span class="hljs-number">64</span>), (<span class="hljs-number">1</span>, <span class="hljs-number">128</span>), (<span class="hljs-number">2</span>, <span class="hljs-number">256</span>), (<span class="hljs-number">2</span>, <span class="hljs-number">512</span>), (<span class="hljs-number">2</span>, <span class="hljs-number">512</span>)]  # VGG架构<br>    net = <span class="hljs-built_in">vgg</span>(conv_arch)<br>    <br>    # 测试网络结构<br>    # X = torch.<span class="hljs-built_in">randn</span>(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">224</span>, <span class="hljs-number">224</span>)  # 输入图像的形状<br>    # for layer in net:<br>    #     X = <span class="hljs-built_in">layer</span>(X)  # 前向传播<br>    #     <span class="hljs-built_in">print</span>(layer.__class__.__name__, <span class="hljs-string">&#x27;output shape:\t&#x27;</span>, X.shape)<br><br>    batch_size = <span class="hljs-number">128</span><br>    train_iter, test_iter = d2l.<span class="hljs-built_in">load_data_fashion_mnist</span>(batch_size, resize=<span class="hljs-number">224</span>)<br>    lr, num_epochs = <span class="hljs-number">0.01</span>, <span class="hljs-number">10</span><br>    d2l.<span class="hljs-built_in">train_ch6</span>(net, train_iter, test_iter, num_epochs, lr, d2l.<span class="hljs-built_in">try_gpu</span>())<br><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>深度学习</category>
+      
+      <category>神经网络</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>AlexNet网络</title>
+    <link href="/2025/08/18/25_08_18AlexNet%E7%BD%91%E7%BB%9C/"/>
+    <url>/2025/08/18/25_08_18AlexNet%E7%BD%91%E7%BB%9C/</url>
+    
+    <content type="html"><![CDATA[<h1 id="AlexNet"><a href="#AlexNet" class="headerlink" title="AlexNet"></a>AlexNet</h1><h2 id="改进（基于LeNet）"><a href="#改进（基于LeNet）" class="headerlink" title="改进（基于LeNet）"></a>改进（基于LeNet）</h2><ol><li>采用ReLU激活函数（解决了梯度消失问题）</li><li>丢弃法</li><li>MaxPooling</li><li>数据增强</li></ol><h2 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h2><p>和LeNet相比，网络结构更复杂，层和核更大<br><img src="/img/Alexnet1.png" alt="网络结构"><br><img src="/img/Alexnet2.png" alt="网络结构-多次卷积"><br><img src="/img/Alexnet3.png" alt="网络结构-全连接层"></p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs routeros">import torch<br><span class="hljs-keyword">from</span> torch import nn<br><span class="hljs-keyword">from</span> d2l import torch as d2l<br><br>net = nn.Sequential(<br>    #卷积单元<br>    nn.Conv2d(1,96,<span class="hljs-attribute">kernel_size</span>=11,stride=4, <span class="hljs-attribute">padding</span>=1), nn.ReLU(),<br>    nn.MaxPool2d(<span class="hljs-attribute">kernel_size</span>=3, <span class="hljs-attribute">stride</span>=2),<br>    nn.Conv2d(96, 256, <span class="hljs-attribute">kernel_size</span>=5, <span class="hljs-attribute">padding</span>=2), nn.ReLU(),<br>    nn.MaxPool2d(<span class="hljs-attribute">kernel_size</span>=3, <span class="hljs-attribute">stride</span>=2),<br>    nn.Conv2d(256, 384, <span class="hljs-attribute">kernel_size</span>=3, <span class="hljs-attribute">padding</span>=1), nn.ReLU(),<br>    nn.Conv2d(384, 384, <span class="hljs-attribute">kernel_size</span>=3, <span class="hljs-attribute">padding</span>=1), nn.ReLU(),<br>    nn.Conv2d(384, 256, <span class="hljs-attribute">kernel_size</span>=3, <span class="hljs-attribute">padding</span>=1), nn.ReLU(),<br>    nn.MaxPool2d(<span class="hljs-attribute">kernel_size</span>=3, <span class="hljs-attribute">stride</span>=2),<br>    #全连接单元<br>    nn.Flatten(),<br>    nn.Linear(6400, 4096), nn.ReLU(),<br>    nn.Dropout(0.5),     #丢弃层<br>    nn.Linear(4096, 4096), nn.ReLU(),   <br>    nn.Dropout(0.5),<br>    nn.Linear(4096, 10)<br>)<br><br><span class="hljs-comment"># X = torch.randn(1, 1, 224, 224)  # 输入图像的形状</span><br><span class="hljs-comment"># for layer in net:</span><br><span class="hljs-comment">#     X = layer(X)  # 前向传播</span><br><span class="hljs-comment">#     print(layer.__class__.__name__, &#x27;output shape:\t&#x27;, X.shape)</span><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    batch_size = 128<br>    train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size, <span class="hljs-attribute">resize</span>=224)<br>    lr, num_epochs = 0.01, 10<br>    d2l.train_ch6(net, train_iter, test_iter, num_epochs, lr, d2l.try_gpu())<br><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>深度学习</category>
+      
+      <category>神经网络</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>池化层</title>
     <link href="/2025/08/18/25_08_18%E6%B1%A0%E5%8C%96%E5%B1%82/"/>
     <url>/2025/08/18/25_08_18%E6%B1%A0%E5%8C%96%E5%B1%82/</url>
