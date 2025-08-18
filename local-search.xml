@@ -8,7 +8,7 @@
     <link href="/2025/08/18/25_08_18GoogleNet%E7%BD%91%E7%BB%9C/"/>
     <url>/2025/08/18/25_08_18GoogleNet%E7%BD%91%E7%BB%9C/</url>
     
-    <content type="html"><![CDATA[<h1 id="GoogleNet"><a href="#GoogleNet" class="headerlink" title="GoogleNet"></a>GoogleNet</h1>]]></content>
+    <content type="html"><![CDATA[<h1 id="GoogleNet"><a href="#GoogleNet" class="headerlink" title="GoogleNet"></a>GoogleNet</h1><h2 id="Inception模块"><a href="#Inception模块" class="headerlink" title="Inception模块"></a>Inception模块</h2><p>多个路径从不同·层面抽取信息，然后在输出通道合并，即使不同路径的输出通道数不同，也可以通过1*1卷积层来进行通道数的匹配。</p><h2 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h2><p><img src="/img/GoogleNet%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84.png" alt="GoogleNet网络结构"></p>]]></content>
     
     
     <categories>
