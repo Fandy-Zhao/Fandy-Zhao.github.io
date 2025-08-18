@@ -19,18 +19,18 @@
   <meta name="author" content="ZF ZHAO">
   <meta name="keywords" content="">
   
-    <meta name="description" content="LOAM代码笔记scanRegistration.cpp目的：实现激光点云的配准，主要包括点云的预处理、特征提取和配准过程。 功能： 订阅原始点云信息，对每周期点云按线序排列（原始信息是混乱的）。需要计算angle俯仰角和ori偏角，angle负责得出该点云的竖直方向的线序，ori负责的出点云的说平偏转度，两者组合成intensity。处理后的每个点云都有x,y,z,intensity四个信息。">
+    <meta name="description" content="LOAM代码笔记源码注解见本人的githubscanRegistration.cpp目的：实现激光点云的配准，主要包括点云的预处理、特征提取和配准过程。 功能： 订阅原始点云信息，对每周期点云按线序排列（原始信息是混乱的）。需要计算angle俯仰角和ori偏角，angle负责得出该点云的竖直方向的线序，ori负责的出点云的说平偏转度，两者组合成intensity。处理后的每个点云都有x,y,z,i">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LOAM代码笔记">
 <meta property="og:url" content="http://example.com/2025/08/16/25_08_16LOAM%E4%BB%A3%E7%A0%81%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="ZF ZHAO">
-<meta property="og:description" content="LOAM代码笔记scanRegistration.cpp目的：实现激光点云的配准，主要包括点云的预处理、特征提取和配准过程。 功能： 订阅原始点云信息，对每周期点云按线序排列（原始信息是混乱的）。需要计算angle俯仰角和ori偏角，angle负责得出该点云的竖直方向的线序，ori负责的出点云的说平偏转度，两者组合成intensity。处理后的每个点云都有x,y,z,intensity四个信息。">
+<meta property="og:description" content="LOAM代码笔记源码注解见本人的githubscanRegistration.cpp目的：实现激光点云的配准，主要包括点云的预处理、特征提取和配准过程。 功能： 订阅原始点云信息，对每周期点云按线序排列（原始信息是混乱的）。需要计算angle俯仰角和ori偏角，angle负责得出该点云的竖直方向的线序，ori负责的出点云的说平偏转度，两者组合成intensity。处理后的每个点云都有x,y,z,i">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/A_LOAM1.png">
 <meta property="og:image" content="http://example.com/img/A_LOAM2.png">
 <meta property="og:image" content="http://example.com/img/A_LOAM3.png">
 <meta property="article:published_time" content="2025-08-16T06:03:33.000Z">
-<meta property="article:modified_time" content="2025-08-16T16:14:58.161Z">
+<meta property="article:modified_time" content="2025-08-18T10:14:32.481Z">
 <meta property="article:author" content="ZF ZHAO">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/img/A_LOAM1.png">
@@ -237,7 +237,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          464 字
+          472 字
         
       </span>
     
@@ -290,7 +290,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="LOAM代码笔记"><a href="#LOAM代码笔记" class="headerlink" title="LOAM代码笔记"></a>LOAM代码笔记</h1><h2 id="scanRegistration-cpp"><a href="#scanRegistration-cpp" class="headerlink" title="scanRegistration.cpp"></a><strong>scanRegistration.cpp</strong></h2><h3 id="目的："><a href="#目的：" class="headerlink" title="目的："></a>目的：</h3><p>实现激光点云的配准，主要包括点云的预处理、特征提取和配准过程。</p>
+                <h1 id="LOAM代码笔记"><a href="#LOAM代码笔记" class="headerlink" title="LOAM代码笔记"></a>LOAM代码笔记</h1><h2 id="源码注解见本人的github"><a href="#源码注解见本人的github" class="headerlink" title="源码注解见本人的github"></a>源码注解见<a target="_blank" rel="noopener" href="https://github.com/Fandy-Zhao/A-LOAM_note.git">本人的github</a></h2><h2 id="scanRegistration-cpp"><a href="#scanRegistration-cpp" class="headerlink" title="scanRegistration.cpp"></a><strong>scanRegistration.cpp</strong></h2><h3 id="目的："><a href="#目的：" class="headerlink" title="目的："></a>目的：</h3><p>实现激光点云的配准，主要包括点云的预处理、特征提取和配准过程。</p>
 <h3 id="功能："><a href="#功能：" class="headerlink" title="功能："></a>功能：</h3><ol>
 <li>订阅原始点云信息，对每周期点云按线序排列（原始信息是混乱的）。需要计算angle俯仰角和ori偏角，angle负责得出该点云的竖直方向的线序，ori负责的出点云的说平偏转度，两者组合成intensity。处理后的每个点云都有x,y,z,intensity四个信息。</li>
 <li>对每周期点云进行特征提取，包括提取角点和面点。计算曲率cloudCurvature，根据曲率判断是否为角点或面点。</li>
