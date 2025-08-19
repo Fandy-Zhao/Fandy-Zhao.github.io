@@ -4,6 +4,48 @@
   
   
   <entry>
+    <title>SSD,YOLO物体检测算法</title>
+    <link href="/2025/08/19/25_08_19SSD%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B%E7%AE%97%E6%B3%95/"/>
+    <url>/2025/08/19/25_08_19SSD%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B%E7%AE%97%E6%B3%95/</url>
+    
+    <content type="html"><![CDATA[<h1 id="SSD"><a href="#SSD" class="headerlink" title="SSD"></a>SSD</h1><h2 id="锚框选择"><a href="#锚框选择" class="headerlink" title="锚框选择"></a>锚框选择</h2><p>以每个像素为中心，生成多个锚框</p><h2 id="模型结构"><a href="#模型结构" class="headerlink" title="模型结构"></a>模型结构</h2><p>多次卷积得到不同大小的图（关注范围不同），每次都有一遍锚框选择<br><img src="/%5Cimg%5CSSD.png" alt="SSD模型结构"></p><h1 id="YOLO"><a href="#YOLO" class="headerlink" title="YOLO"></a>YOLO</h1><h2 id="锚框选择-1"><a href="#锚框选择-1" class="headerlink" title="锚框选择"></a>锚框选择</h2><p>将图片均匀分为S*S个锚框，每个锚框去预测多个种类边缘框（避免单个锚框框住多个种类目标）</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>深度学习</category>
+      
+      <category>物体检测</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>RCNN物体检测算法</title>
+    <link href="/2025/08/19/25_08_19RCNN%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B%E7%AE%97%E6%B3%95/"/>
+    <url>/2025/08/19/25_08_19RCNN%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B%E7%AE%97%E6%B3%95/</url>
+    
+    <content type="html"><![CDATA[<h1 id="R-CNN"><a href="#R-CNN" class="headerlink" title="R-CNN"></a>R-CNN</h1><p><img src="/img/RCNN1.png" alt="示意图"></p><ul><li>启发式搜索来选择锚框</li><li>通过CNN提取特征</li><li>基于锚框的分类和回归<ul><li>分类: SVM</li><li>回归: 线性回归,来获得锚框和目标框的偏移量</li></ul></li></ul><h2 id="兴趣区域（ROI）池化层"><a href="#兴趣区域（ROI）池化层" class="headerlink" title="兴趣区域（ROI）池化层"></a>兴趣区域（ROI）池化层</h2><p>将不同大小的特征图转换为固定大小的特征图</p><ul><li>输入: 特征图, 锚框</li><li>输出: 固定大小的特征图</li><li>过程:<ul><li>对每个锚框, 均匀分割为固定数量的区域</li><li>对每个区域, 取像素最大值</li><li>输出固定大小的特征图<br><img src="/img/RCNN2.png" alt="ROI池化"></li></ul></li></ul><h1 id="Fast-R-CNN"><a href="#Fast-R-CNN" class="headerlink" title="Fast R-CNN"></a>Fast R-CNN</h1><h2 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h2><ul><li>改变了启发式搜索的位置</li><li>引入了CNN的特征提取层，在ROI池化层之前。在原图像中启发式搜索获取锚框，映射到CNN的输出上，再交给CNN。可以先抽取全局的特征再进行ROI池化，而不是先ROI池化再过CNN.</li></ul><h1 id="Faster-R-CNN"><a href="#Faster-R-CNN" class="headerlink" title="Faster R-CNN"></a>Faster R-CNN</h1><h2 id="改进-相对于-Fast-R-CNN"><a href="#改进-相对于-Fast-R-CNN" class="headerlink" title="改进(相对于 Fast R-CNN)"></a>改进(相对于 Fast R-CNN)</h2><ul><li>将启发式搜索替换为区域建议网络RPN（Region Proposal Network）<ul><li>输入: 图像</li><li>输出: 锚框</li><li>过程:<ul><li>使用CNN提取特征图</li><li>生成锚框</li><li>预测每个锚框的分类和回归偏移量</li><li>非极大值抑制(NMS)<ul><li>输入: 锚框, 分类分数</li><li>输出: 保留的锚框</li><li>过程:<ul><li>对每个类别, 按分类分数排序</li><li>从高到低遍历, 保留当前锚框, 并移除与当前锚框重叠度高的锚框</li></ul></li></ul></li></ul></li></ul></li></ul><p><img src="/img/RPN.png" alt="RPN"></p><h1 id="Mask-R-CNN"><a href="#Mask-R-CNN" class="headerlink" title="Mask R-CNN"></a>Mask R-CNN</h1><h2 id="改进-相对于-Faster-R-CNN"><a href="#改进-相对于-Faster-R-CNN" class="headerlink" title="改进(相对于 Faster R-CNN)"></a>改进(相对于 Faster R-CNN)</h2><ul><li>引入了掩码预测层FCN( Fully Convolutional Network)<ul><li>作用：利用像素级的标号</li><li>输入: 锚框</li><li>输出: 掩码</li><li>过程:<ul><li>对每个锚框, 预测一个二进制掩码</li><li>对每个像素, 预测它是否属于物体</li></ul></li></ul></li><li>ROI池化层被替换成ROI align层<ul><li>作用：更准确的提取特征</li><li>输入: 特征图, 锚框</li><li>输出: 固定大小的特征图</li><li>过程:<ul><li>对每个锚框, 均匀分割为固定数量的区域（每个区域的大小相同，交叉的像素点会被按权重拆开）</li><li>对每个区域, 取像素最大值</li><li>输出固定大小的特征图<br><img src="/img/MaskRCNN.png" alt="Mask R-CNN"></li></ul></li></ul></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>深度学习</category>
+      
+      <category>物体检测</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>ResNet网络</title>
     <link href="/2025/08/18/25_08_18ResNet%E7%BD%91%E7%BB%9C/"/>
     <url>/2025/08/18/25_08_18ResNet%E7%BD%91%E7%BB%9C/</url>
