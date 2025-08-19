@@ -4,6 +4,27 @@
   
   
   <entry>
+    <title>LOAM_Livox论文笔记</title>
+    <link href="/2025/08/20/25_08_20LOAM-Livox%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+    <url>/2025/08/20/25_08_20LOAM-Livox%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</url>
+    
+    <content type="html"><![CDATA[<p><img src="/%5Cimg%5CLOAM_Livox1.png" alt="LOAM_Livox"></p><h1 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h1><ul><li>在非常有限的FoV中进行特征提取和选择</li><li>鲁棒的离群点剔除：激光雷达的扫描线束和扫描轨迹分布不均匀</li><li>移动对象过滤</li><li>运动失真补偿</li></ul><h1 id="POINTS-SELECTION-AND-FEATURE-EXTRACTION"><a href="#POINTS-SELECTION-AND-FEATURE-EXTRACTION" class="headerlink" title="POINTS SELECTION AND FEATURE EXTRACTION"></a>POINTS SELECTION AND FEATURE EXTRACTION</h1><p>受激光雷达在真实物理世界的限制，需要在原始点云信息中提取出好的特征点</p><ol><li>分类<br> 按照特定指标选择点<ol><li>对于每个点计算下列指标</li></ol><ul><li>Depth D：点到雷达的距离</li><li>laser deflection angle φ ：X轴与激光线夹角</li><li>intensity I ：反射强度，R是物体反射率，由雷达测量</li><li>incident angle θ ：入射角，激光层与测量点周围的局部平面之间的角度<img src="/%5Cimg%5CLOAM_Livox4.png" alt="入射角示意图"></li></ul><ol start="2"><li>计算公式<br> <img src="/%5Cimg%5CLOAM_Livox2.png" alt="1"><br> <img src="/%5Cimg%5CLOAM_Livox3.png" alt="2"></li><li>舍弃原则</li></ol><ul><li>靠近雷达视野边缘。此时扫描轨迹不可靠</li><li>intensity太大或太小。都会降低测量的准确率</li><li>入射角接近π或0的点。会产生光斑导致测量的是一片范围的均值而不是某一特定点</li><li>被障碍物遮挡的点。会被误判为边缘点</li></ul></li><li>特征提取<ul><li>计算局部平滑度（应该是曲率）来提取边缘点和平面点</li><li>引入反射率作为判断依据，如果由一点和周围点的反射率区别过大，被视为（材料）边缘点</li></ul></li></ol><h1 id="ITERATIVE-POSE-OPTIMIZATION-迭代姿态优化"><a href="#ITERATIVE-POSE-OPTIMIZATION-迭代姿态优化" class="headerlink" title="ITERATIVE POSE OPTIMIZATION  迭代姿态优化"></a>ITERATIVE POSE OPTIMIZATION  迭代姿态优化</h1><p>受雷达非重复扫描的影响，不能利用重复点的匹配来获得位姿</p><ol><li>边对边的残差计算<ol><li>在当前帧中选取一点Pl，再从全局地图中选取距离Pl最近的5个点：先将Pl映射到地图系，在从地图系的KDtree里面选取5个点</li><li>以当前帧的最后一点Pw的雷达姿态为准，计算当前帧到地图的转换矩阵来实现投影</li><li>确保选取的5个Pi和点Pw在同一条直线上    </li><li>残差计算<br> <img src="/%5Cimg%5CLOAM_Livox5.png" alt="3和4计算思路"></li></ol></li><li>面对面的残差计算<br> 和边对边的残差计算思路相同，就是计算是否是同一平面上由不同<br> <img src="/%5Cimg%5CLOAM_Livox6.png" alt="计算思路"></li><li>帧内运动补偿<ol><li>分段处理：同一帧分成几部分，独立进行处理。相当于缩短运动时间，减轻运动带来的影响，分开处理还可以并行计算，缩短计算时间</li><li>线性插值：假设在一帧中运动是均匀的，可以利用最后一个点的姿态变化去估计之前点的转换矩阵<img src="/%5Cimg%5CLOAM_Livox7.png" alt="线性插值计算细节"></li></ol></li><li>离群点剔除和移动对象过滤<br> 避免移动物体对扫描精度产生影响<br> 思路：在每次迭代重新计算所有特征点对应的残差，先做迭代优化残差，最后在优化后结果中去除前20%最大的点（边缘点和平面点分开进行处理）</li></ol><h1 id="个人评价"><a href="#个人评价" class="headerlink" title="个人评价"></a>个人评价</h1><p>亮点：</p><ul><li>特征提取时引入反射强度作为评价依据</li><li>迭代姿态优化可以解决雷达扫描不重复的问题</li><li>将优化后残差较大的点作为运动点</li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>SLAM</category>
+      
+      <category>LOAM</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>SSD,YOLO物体检测算法</title>
     <link href="/2025/08/19/25_08_19SSD%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B%E7%AE%97%E6%B3%95/"/>
     <url>/2025/08/19/25_08_19SSD%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B%E7%AE%97%E6%B3%95/</url>
