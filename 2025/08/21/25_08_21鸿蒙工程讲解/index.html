@@ -1,0 +1,728 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ZF ZHAO">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="工程目录结构（Stage模型）目录结构12345678910111213141516├── AppScope &gt; app.json5：应用的全局配置信息，详见app.json5配置文件。├── entry：HarmonyOS工程模块，编译构建生成一个HAP包。    ├── src &gt; main &gt; ets：用于存放ArkTS源码。    ├── src &gt; main &amp;g">
+<meta property="og:type" content="article">
+<meta property="og:title" content="鸿蒙工程讲解">
+<meta property="og:url" content="http://example.com/2025/08/21/25_08_21%E9%B8%BF%E8%92%99%E5%B7%A5%E7%A8%8B%E8%AE%B2%E8%A7%A3/index.html">
+<meta property="og:site_name" content="ZF ZHAO">
+<meta property="og:description" content="工程目录结构（Stage模型）目录结构12345678910111213141516├── AppScope &gt; app.json5：应用的全局配置信息，详见app.json5配置文件。├── entry：HarmonyOS工程模块，编译构建生成一个HAP包。    ├── src &gt; main &gt; ets：用于存放ArkTS源码。    ├── src &gt; main &amp;g">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/%5Cimg%5C%E5%BC%80%E5%8F%91to%E7%BC%96%E8%AF%91.png">
+<meta property="article:published_time" content="2025-08-21T10:46:26.000Z">
+<meta property="article:modified_time" content="2025-08-21T12:25:27.356Z">
+<meta property="article:author" content="ZF ZHAO">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/%5Cimg%5C%E5%BC%80%E5%8F%91to%E7%BC%96%E8%AF%91.png">
+  
+  
+  
+  <title>鸿蒙工程讲解 - ZF ZHAO</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>ZF ZHAO</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="鸿蒙工程讲解"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-08-21 18:46" pubdate>
+          2025年8月21日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          23 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">鸿蒙工程讲解</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="工程目录结构（Stage模型）"><a href="#工程目录结构（Stage模型）" class="headerlink" title="工程目录结构（Stage模型）"></a>工程目录结构（Stage模型）</h1><h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs css">├── AppScope &gt; app<span class="hljs-selector-class">.json5</span>：应用的全局配置信息，详见app<span class="hljs-selector-class">.json5</span>配置文件。<br>├── entry：HarmonyOS工程模块，编译构建生成一个HAP包。<br>    ├── <span class="hljs-attribute">src</span> &gt; <span class="hljs-selector-tag">main</span> &gt; ets：用于存放ArkTS源码。<br>    ├── <span class="hljs-attribute">src</span> &gt; <span class="hljs-selector-tag">main</span> &gt; ets &gt; entryability：应用/服务的入口。<br>    ├── <span class="hljs-attribute">src</span> &gt; <span class="hljs-selector-tag">main</span> &gt; ets &gt; entrybackupability：应用提供扩展的备份恢复能力。<br>    ├── <span class="hljs-attribute">src</span> &gt; <span class="hljs-selector-tag">main</span> &gt; ets &gt; pages：应用/服务包含的页面。<br>    ├── <span class="hljs-attribute">src</span> &gt; <span class="hljs-selector-tag">main</span> &gt; resources：用于存放应用/服务所用到的资源文件，如图形、多媒体、字符串、布局文件等。关于资源文件，详见资源分类与访问。<br>    ├── <span class="hljs-attribute">src</span> &gt; <span class="hljs-selector-tag">main</span> &gt; module<span class="hljs-selector-class">.json5</span>：模块配置文件。主要包含HAP包的配置信息、应用/服务在具体设备上的配置信息以及应用/服务的全局配置信息。具体的配置文件说明，详见module<span class="hljs-selector-class">.json5</span>配置文件。<br>    ├── build-profile<span class="hljs-selector-class">.json5</span>：当前的模块信息 、编译信息配置项，包括buildOption、targets配置等。<br>    ├── hvigorfile<span class="hljs-selector-class">.ts</span>：模块级编译构建任务脚本。<br>    ├── obfuscation-rules<span class="hljs-selector-class">.txt</span>：混淆规则文件。混淆开启后，在使用Release模式进行编译时，会对代码进行编译、混淆及压缩处理，保护代码资产。详见开启代码混淆。<br>    ├── oh-package<span class="hljs-selector-class">.json5</span>：用来描述包名、版本、入口文件（类型声明文件）和依赖项等信息。<br>├── oh_modules：用于存放三方库依赖信息。<br>├── build-profile<span class="hljs-selector-class">.json5</span>：工程级配置信息，包括签名signingConfigs、产品配置products等。其中products中可配置当前运行环境，默认为HarmonyOS。<br>├── hvigorfile<span class="hljs-selector-class">.ts</span>：工程级编译构建任务脚本。<br>├── oh-package<span class="hljs-selector-class">.json5</span>：主要用来描述全局配置，如：依赖覆盖（overrides）、依赖关系重写（overrideDependencyMap）和参数化配置（parameterFile）等<br></code></pre></td></tr></table></figure>
+<h1 id="应用程序包"><a href="#应用程序包" class="headerlink" title="应用程序包"></a>应用程序包</h1><p>用户应用程序是指运行在设备操作系统之上，为用户提供特定服务的程序，简称“应用”。一个应用所对应的软件包文件，称为“应用程序包”。</p>
+<h2 id="多Module设计机制"><a href="#多Module设计机制" class="headerlink" title="多Module设计机制"></a>多Module设计机制</h2><ul>
+<li><strong>支持模块化开发</strong>： 一个应用通常包含多种功能，将不同的功能特性按模块来划分和管理是一种良好的设计方式。在开发过程中，开发者可以将每个功能模块作为一个独立的Module进行开发，Module中可以包含源代码、资源文件、第三方库、配置文件等，每一个Module可以独立编译，实现特定的功能。这种模块化、松耦合的应用管理方式有利于应用的开发、维护与扩展。</li>
+<li><strong>支持多设备适配</strong>： 一个应用往往需要适配多种设备类型，在采用多Module设计的应用中，每个Module都会标注所支持的设备类型。Module支持的设备类型不同，有的支持全部类型，有的仅支持特定类型（例如平板）。在应用市场分发应用包时，可以根据设备类型进行精准筛选和匹配，从而合理组合和部署不同的包到对应的设备上。</li>
+</ul>
+<h2 id="Module类型"><a href="#Module类型" class="headerlink" title="Module类型"></a>Module类型</h2><p>Module按照使用场景可以分为两种类型：</p>
+<ul>
+<li><p>Ability类型的Module： 用于实现应用的功能和特性。每一个Ability类型的Module编译后，会生成一个以.hap为后缀的文件，称为HAP（Harmony Ability Package）包。HAP包可以独立安装和运行，是应用安装的基本单位，一个应用可以包含一个或多个HAP包，包含的HAP包分为以下两种类型。</p>
+<ul>
+<li>entry类型的Module：应用的主模块，包含应用的入口界面、入口图标和主功能特性，编译后生成entry类型的HAP。每一个应用分发到同一类型的设备上的应用程序包，只能包含唯一一个entry类型的HAP，也可以不包含。</li>
+<li>feature类型的Module：应用的动态特性模块，编译后生成feature类型的HAP。一个应用中可以包含一个或多个feature类型的HAP，也可以不包含。</li>
+</ul>
+</li>
+<li><p>Library类型的Module： 用于实现代码和资源的共享。同一个Library类型的Module可以被其他的Module多次引用，合理地使用该类型的Module，能够降低开发和维护成本。Library类型的Module分为Static和Shared两种类型，编译后生成共享包。</p>
+</li>
+<li><p>Library类型的Module</p>
+</li>
+<li><p>Static Library：静态共享库。编译后生成一个以.har为后缀的文件，即静态共享包HAR（Harmony Archive）。 <strong>注意</strong>：编译HAR时，建议开启混淆能力，保护代码资产。</p>
+</li>
+<li><p>Shared Library：动态共享库。编译后生成一个以.hsp为后缀的文件，即动态共享包HSP（Harmony Shared Package）。</p>
+</li>
+</ul>
+<h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p>实际上，Shared Library编译后除了会生成一个.hsp文件，还会生成一个.har文件。这个.har文件中包含了HSP对外导出的接口，应用中的其他模块需要通过.har文件来引用HSP的功能。为了表述方便，通常认为编译Shared Library后会生成HSP。</p>
+<h1 id="Stage模型应用程序包结构"><a href="#Stage模型应用程序包结构" class="headerlink" title="Stage模型应用程序包结构"></a>Stage模型应用程序包结构</h1><h2 id="开发态包结构"><a href="#开发态包结构" class="headerlink" title="开发态包结构"></a>开发态包结构</h2><p>工程结构主要包含的文件类型及用途如下(ModuleName指的是entry这类文件夹)：</p>
+<ul>
+<li>配置文件：包括应用级配置信息、以及Module级配置信息<ul>
+<li>AppScope &gt; app.json5：app.json5配置文件，用于声明应用的全局配置信息，比如应用Bundle名称、应用名称、应用图标、应用版本号等。</li>
+<li>ModuleName &gt; src &gt; main &gt; module.json5：module.json5配置文件，用于声明Module基本信息、支持的设备类型、所含的组件信息、运行所需申请的权限等。</li>
+</ul>
+</li>
+<li>ArkTS源码文件<ul>
+<li>ModuleName &gt; src &gt; main &gt; ets：用于存放Module的ArkTS源码文件（.ets文件）。</li>
+</ul>
+</li>
+<li>资源文件：包括应用级资源文件、以及Module级资源文件，支持图形、多媒体、字符串、布局文件等，详见资源分类与访问<ul>
+<li>AppScope &gt; resources ：用于存放应用需要用到的资源文件。</li>
+<li>ModuleName &gt; src &gt; main &gt; resources ：用于存放该Module需要用到的资源文件。</li>
+</ul>
+</li>
+<li>其他配置文件：用于编译构建，包括构建配置文件、编译构建任务脚本、混淆规则文件、依赖的共享包信息等<ul>
+<li>build-profile.json5：工程级或Module级的构建配置文件，包括应用签名、产品配置等。</li>
+<li>hvigorfile.ts：工程级或Module级的编译构建任务脚本，开发者可以自定义编译构建工具版本、控制构建行为的配置参数。</li>
+<li>obfuscation-rules.txt：混淆规则文件。混淆开启后，在使用Release模式进行编译时，会对代码进行编译、混淆及压缩处理，保护代码资产。</li>
+<li>oh-package.json5：用于存放依赖库的信息，包括所依赖的三方库和共享包。</li>
+</ul>
+</li>
+</ul>
+<h2 id="编译态包结构"><a href="#编译态包结构" class="headerlink" title="编译态包结构"></a>编译态包结构</h2><p>不同类型的Module编译后会生成对应的HAP、HAR、HSP等文件，开发态视图与编译态视图的对照关系如下<br><img src="/%5Cimg%5C%E5%BC%80%E5%8F%91to%E7%BC%96%E8%AF%91.png" srcset="/img/loading.gif" lazyload alt="开发态与编译态的工程结构视图"></p>
+<h1 id="HAP开发"><a href="#HAP开发" class="headerlink" title="HAP开发"></a>HAP开发</h1><p>HAP（Harmony Ability Package）是应用安装和运行的基本单元。HAP包是由代码、资源、第三方库、配置文件等打包生成的模块包</p>
+<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><ul>
+<li>entry类型的HAP：应用的主模块，包含应用的入口界面、入口图标和主功能特性，编译后生成entry类型的HAP。每一个应用分发到同一类型的设备上的应用程序包，只能包含唯一一个entry类型的HAP，也可以不包含。</li>
+<li>feature类型的HAP：应用的动态特性模块，编译后生成feature类型的HAP。一个应用中可以包含一个或多个feature类型的HAP，也可以不包含。</li>
+</ul>
+<h2 id="约束限制"><a href="#约束限制" class="headerlink" title="约束限制"></a>约束限制</h2><ul>
+<li>不支持导出接口和ArkUI组件，给其他模块使用。</li>
+<li>多HAP场景下，App Pack包中同一设备类型的所有HAP中最多只能包含一个Entry类型的HAP，也可以不包含；Feature类型的HAP可以包含一个或者多个，也可以不包含。</li>
+<li>多HAP场景下，同一应用中的所有HAP的配置文件中的bundleName、versionCode、versionName、minCompatibleVersionCode、debug、minAPIVersion、targetAPIVersion、apiReleaseType相同，同一设备类型的所有HAP对应的moduleName标签必须唯一。HAP打包生成App Pack包时，会对上述参数配置进行校验。</li>
+<li>多HAP场景下，同一应用的所有HAP、HSP的签名证书要保持一致。上架应用市场是以App Pack形式上架，应用市场分发时会将所有HAP从App Pack中拆分出来，同时对所有HAP进行重签名，以保证签名证书的一致性。在调试阶段，开发者通过命令行或DevEco Studio将HAP安装到设备上时，要保证所有HAP签名证书一致，否则会出现安装失败的问题，签名操作请参考应用&#x2F;元服务签名。</li>
+</ul>
+<h1 id="HAR开发"><a href="#HAR开发" class="headerlink" title="HAR开发"></a>HAR开发</h1><p>HAR（Harmony Archive）是静态共享包，可以包含代码、C++库、资源和配置文件。通过HAR可以实现多个模块或多个工程共享ArkUI组件、资源等相关代码。</p>
+<h2 id="约束限制-1"><a href="#约束限制-1" class="headerlink" title="约束限制"></a>约束限制</h2><ul>
+<li>HAR不支持在设备上单独安装或运行，只能作为应用模块的依赖项被引用。</li>
+<li>HAR不支持在配置文件中声明ExtensionAbility组件。从API version 14开始，支持在配置文件中声明UIAbility组件，配置UIAbility的方法参考在模块中添加Ability，拉起HAR中UIAbility的方式与启动应用内的UIAbility方法相同。</li>
+</ul>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs objectivec">说明<br>如果使用startAbility接口拉起HAR中的<span class="hljs-built_in">UIAbility</span>，接口参数中的moduleName取值需要为依赖该HAR的HAP/HSP的moduleName。<br></code></pre></td></tr></table></figure>
+<ul>
+<li>HAR不支持在配置文件中声明pages页面，但是可以包含pages页面，并通过Navigation跳转的方式进行跳转。</li>
+<li>HAR不支持引用AppScope目录中的资源。在编译构建时，AppScope中的内容不会打包到HAR中，因此会导致HAR资源引用失败。</li>
+<li>由于HSP仅支持应用内共享，如果HAR依赖了HSP，则该HAR文件仅支持应用内共享，不支持发布到二方仓或三方仓供其他应用使用，否则会导致编译失败。</li>
+<li>多包（HAP&#x2F;HSP）引用相同的HAR时，会造成多包间代码和资源的重复拷贝，从而导致应用包变大。</li>
+<li>HAR可以依赖其他HAR或者HSP，但不支持循环依赖，也不支持依赖传递。</li>
+<li>HAP引用HAR时，在编译构建过程中系统会自动合并两者的权限配置。因此开发者无需在HAP和HAR中重复申请相同权限。</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css">说明<br>循环依赖：例如有三个HAR，HAR-<span class="hljs-selector-tag">A</span>、HAR-<span class="hljs-selector-tag">B</span>和HAR-C，循环依赖指HAR-<span class="hljs-selector-tag">A</span>依赖HAR-<span class="hljs-selector-tag">B</span>，HAR-<span class="hljs-selector-tag">B</span>依赖HAR-C，HAR-C又依赖HAR-<span class="hljs-selector-tag">A</span>。<br>依赖传递：例如有三个HAR，HAR-<span class="hljs-selector-tag">A</span>、HAR-<span class="hljs-selector-tag">B</span>和HAR-C，依赖关系是HAR-<span class="hljs-selector-tag">A</span>依赖HAR-<span class="hljs-selector-tag">B</span>，HAR-<span class="hljs-selector-tag">B</span>依赖HAR-C。不支持传递依赖指HAR-<span class="hljs-selector-tag">A</span>可以使用HAR-<span class="hljs-selector-tag">B</span>的方法和组件，但是HAR-<span class="hljs-selector-tag">A</span>不能直接使用HAR-C的方法和组件。<br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%B8%BF%E8%92%99/" class="category-chain-item">鸿蒙</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E9%B8%BF%E8%92%99/%E5%B7%A5%E7%A8%8B/" class="category-chain-item">工程</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>鸿蒙工程讲解</div>
+      <div>http://example.com/2025/08/21/25_08_21鸿蒙工程讲解/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>ZF ZHAO</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年8月21日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/08/20/25_08_20LOAM-Livox%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" title="LOAM_Livox论文笔记">
+                        <span class="hidden-mobile">LOAM_Livox论文笔记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
