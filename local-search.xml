@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>转置卷积</title>
+    <link href="/2025/08/22/25_08_22_%E8%BD%AC%E7%BD%AE%E5%8D%B7%E7%A7%AF/"/>
+    <url>/2025/08/22/25_08_22_%E8%BD%AC%E7%BD%AE%E5%8D%B7%E7%A7%AF/</url>
+    
+    <content type="html"><![CDATA[<h1 id="上采样"><a href="#上采样" class="headerlink" title="上采样"></a>上采样</h1><p>使用神经网络的过程中,我们经常需要上采样(up-sampling)来提高低分辨率图片的分辨率.</p><h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><ul><li>插值<ul><li>最近邻插值</li><li>双线性插值</li><li>双立方插值</li></ul></li><li>转置卷积</li></ul><h1 id="转置卷积"><a href="#转置卷积" class="headerlink" title="转置卷积"></a>转置卷积</h1><p>转置卷积是上采样的一种方法,它的主要思想是将卷积操作的过程反过来进行,从而实现上采样的目的。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>深度学习</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>FCN网络</title>
     <link href="/2025/08/22/25_08_22FCN%E7%BD%91%E7%BB%9C/"/>
     <url>/2025/08/22/25_08_22FCN%E7%BD%91%E7%BB%9C/</url>
