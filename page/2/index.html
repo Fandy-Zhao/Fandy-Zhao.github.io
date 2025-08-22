@@ -240,6 +240,189 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
+        <a href="/2025/08/18/25_08_18NiN%E7%BD%91%E7%BB%9C/" target="_self">
+          NiN网络
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/18/25_08_18NiN%E7%BD%91%E7%BB%9C/" target="_self">
+        <div>
+          NiN前言问题：对于全连接层，在卷积层之后的第一个全连接层的输入通道数是非常大的，这个时候如果使用全连接层，会导致参数数量非常多，从而导致模型的过拟合。 NiN网络NiN块 一个卷积层后跟两个全连接层 全连接层：1*1卷积层  架构 无全连接层 交替使用NiN块和步幅为2的最大池化层（逐步减小高宽和增大通道数） 最后使用全局平均池化层的到输出（输入通道是类别数）  代码定义NiN块12345678
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-08-18 12:08" pubdate>
+              2025-08-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="category-chain-item">深度学习</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" class="category-chain-item">神经网络</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/08/18/25_08_18VGG%E7%BD%91%E7%BB%9C/" target="_self">
+          VGG网络
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/18/25_08_18VGG%E7%BD%91%E7%BB%9C/" target="_self">
+        <div>
+          VGG前言AlexNet对于LeNet的提升得益于网络的更深更大，网络更深更大的方法：  更多的全连接层 更多的卷积层 将卷积层分成块（VGG）  和AlexNet的区别：使用尺寸更小的3×3卷积核串联来替代大卷积核11×11,7×7这样的大尺寸卷积核，引入块设计思想，在相同的感受野的情况下，多个串联非线性能力更强，描述能力更强 VGG思路VGG网络的思路是将卷积层分成多个块，每个块包含多个卷积层
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-08-18 11:45" pubdate>
+              2025-08-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="category-chain-item">深度学习</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" class="category-chain-item">神经网络</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/08/18/25_08_18AlexNet%E7%BD%91%E7%BB%9C/" target="_self">
+          AlexNet网络
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/18/25_08_18AlexNet%E7%BD%91%E7%BB%9C/" target="_self">
+        <div>
+          AlexNet改进（基于LeNet） 采用ReLU激活函数（解决了梯度消失问题） 丢弃法 MaxPooling 数据增强  网络结构和LeNet相比，网络结构更复杂，层和核更大 代码12345678910111213141516171819202122232425262728293031323334import torchfrom torch import nnfrom d2l import to
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-08-18 10:28" pubdate>
+              2025-08-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="category-chain-item">深度学习</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" class="category-chain-item">神经网络</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
         <a href="/2025/08/18/25_08_18%E6%B1%A0%E5%8C%96%E5%B1%82/" target="_self">
           池化层
         </a>
@@ -617,175 +800,6 @@
             <i class="iconfont icon-date"></i>
             <time datetime="2025-08-17 11:20" pubdate>
               2025-08-17
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="category-chain-item">深度学习</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/08/17/25_08_17pytorch%E5%9F%BA%E7%A1%80/" target="_self">
-          pytorch基础
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/17/25_08_17pytorch%E5%9F%BA%E7%A1%80/" target="_self">
-        <div>
-          pytorch基础自定义块12345678910111213import torchfrom torch import nnfrom torch.nn import functional as Fclass MLP(nn.Module):    def __init__(self):        super().__init__()        self.hidden = nn.Linear(
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-08-17 10:12" pubdate>
-              2025-08-17
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="category-chain-item">深度学习</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/08/16/25_08_16LOAM%E4%BB%A3%E7%A0%81%E7%AC%94%E8%AE%B0/" target="_self">
-          LOAM代码笔记
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/16/25_08_16LOAM%E4%BB%A3%E7%A0%81%E7%AC%94%E8%AE%B0/" target="_self">
-        <div>
-          LOAM代码笔记源码注解见本人的githubscanRegistration.cpp目的：实现激光点云的配准，主要包括点云的预处理、特征提取和配准过程。 功能： 订阅原始点云信息，对每周期点云按线序排列（原始信息是混乱的）。需要计算angle俯仰角和ori偏角，angle负责得出该点云的竖直方向的线序，ori负责的出点云的说平偏转度，两者组合成intensity。处理后的每个点云都有x,y,z,i
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-08-16 14:03" pubdate>
-              2025-08-16
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/SLAM/" class="category-chain-item">SLAM</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/SLAM/LOAM/" class="category-chain-item">LOAM</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/08/16/25_08_16%E4%B8%A2%E5%BC%83%E6%B3%95/" target="_self">
-          丢弃法  正则化
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/16/25_08_16%E4%B8%A2%E5%BC%83%E6%B3%95/" target="_self">
-        <div>
-          丢弃法目的在训练中加入偏差，使得训练更稳定 方法训练时在隐藏层后加一层扰动，在加入噪音的基础上不改变原先的期望。在推理时不使用。 内容讲解 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354import torch from torch impor
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-08-16 00:28" pubdate>
-              2025-08-16
             </time>
           </div>
         
