@@ -8,7 +8,7 @@
     <link href="/2025/08/22/25_08_22FCN%E7%BD%91%E7%BB%9C/"/>
     <url>/2025/08/22/25_08_22FCN%E7%BD%91%E7%BB%9C/</url>
     
-    <content type="html"><![CDATA[<h1 id="全连接神经网络FCN"><a href="#全连接神经网络FCN" class="headerlink" title="全连接神经网络FCN"></a>全连接神经网络FCN</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul><li>深度神经网络做语义分割的基础</li><li>用转置卷积层替换全连接层，可以实现每个像素的预测</li></ul><h2 id="转置卷积Transpose-Convolution"><a href="#转置卷积Transpose-Convolution" class="headerlink" title="转置卷积Transpose Convolution"></a>转置卷积Transpose Convolution</h2><h2 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h2><p><img src="/img/FCN%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84.png" alt="FCN网络结构"></p>]]></content>
+    <content type="html"><![CDATA[<h1 id="全连接神经网络FCN"><a href="#全连接神经网络FCN" class="headerlink" title="全连接神经网络FCN"></a>全连接神经网络FCN</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul><li>深度神经网络做语义分割的基础</li><li>用转置卷积层替换池化层和全连接层，可以实现每个像素的预测</li></ul><h2 id="转置卷积Transpose-Convolution"><a href="#转置卷积Transpose-Convolution" class="headerlink" title="转置卷积Transpose Convolution"></a>转置卷积Transpose Convolution</h2><h2 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h2><p><img src="/img/FCN%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84.png" alt="FCN网络结构"></p>]]></content>
     
     
     <categories>
