@@ -26,18 +26,18 @@
 <meta property="og:site_name" content="ZF ZHAO">
 <meta property="og:description" content="解决问题 在非常有限的FoV中进行特征提取和选择 鲁棒的离群点剔除：激光雷达的扫描线束和扫描轨迹分布不均匀 移动对象过滤 运动失真补偿  POINTS SELECTION AND FEATURE EXTRACTION受激光雷达在真实物理世界的限制，需要在原始点云信息中提取出好的特征点  分类 按照特定指标选择点 对于每个点计算下列指标   Depth D：点到雷达的距离 laser deflec">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/%5Cimg%5CLOAM_Livox1.png">
-<meta property="og:image" content="http://example.com/%5Cimg%5CLOAM_Livox4.png">
-<meta property="og:image" content="http://example.com/%5Cimg%5CLOAM_Livox2.png">
-<meta property="og:image" content="http://example.com/%5Cimg%5CLOAM_Livox3.png">
-<meta property="og:image" content="http://example.com/%5Cimg%5CLOAM_Livox5.png">
-<meta property="og:image" content="http://example.com/%5Cimg%5CLOAM_Livox6.png">
-<meta property="og:image" content="http://example.com/%5Cimg%5CLOAM_Livox7.png">
+<meta property="og:image" content="http://example.com/img/LOAM_Livox1.png">
+<meta property="og:image" content="http://example.com/img/LOAM_Livox4.png">
+<meta property="og:image" content="http://example.com/img/LOAM_Livox2.png">
+<meta property="og:image" content="http://example.com/img/LOAM_Livox3.png">
+<meta property="og:image" content="http://example.com/img/LOAM_Livox5.png">
+<meta property="og:image" content="http://example.com/img/LOAM_Livox6.png">
+<meta property="og:image" content="http://example.com/img/LOAM_Livox7.png">
 <meta property="article:published_time" content="2025-08-19T16:35:09.000Z">
-<meta property="article:modified_time" content="2025-08-19T17:43:43.181Z">
+<meta property="article:modified_time" content="2025-08-22T13:37:52.345Z">
 <meta property="article:author" content="ZF ZHAO">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/%5Cimg%5CLOAM_Livox1.png">
+<meta name="twitter:image" content="http://example.com/img/LOAM_Livox1.png">
   
   
   
@@ -294,7 +294,7 @@
             
               <div class="markdown-body">
                 
-                <p><img src="/%5Cimg%5CLOAM_Livox1.png" srcset="/img/loading.gif" lazyload alt="LOAM_Livox"></p>
+                <p><img src="/img/LOAM_Livox1.png" srcset="/img/loading.gif" lazyload alt="LOAM_Livox"></p>
 <h1 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h1><ul>
 <li>在非常有限的FoV中进行特征提取和选择</li>
 <li>鲁棒的离群点剔除：激光雷达的扫描线束和扫描轨迹分布不均匀</li>
@@ -310,10 +310,10 @@
 <li>Depth D：点到雷达的距离</li>
 <li>laser deflection angle φ ：X轴与激光线夹角</li>
 <li>intensity I ：反射强度，R是物体反射率，由雷达测量</li>
-<li>incident angle θ ：入射角，激光层与测量点周围的局部平面之间的角度<img src="/%5Cimg%5CLOAM_Livox4.png" srcset="/img/loading.gif" lazyload alt="入射角示意图"></li>
+<li>incident angle θ ：入射角，激光层与测量点周围的局部平面之间的角度<img src="/img/LOAM_Livox4.png" srcset="/img/loading.gif" lazyload alt="入射角示意图"></li>
 </ul>
 <ol start="2">
-<li>计算公式<br> <img src="/%5Cimg%5CLOAM_Livox2.png" srcset="/img/loading.gif" lazyload alt="1"><br> <img src="/%5Cimg%5CLOAM_Livox3.png" srcset="/img/loading.gif" lazyload alt="2"></li>
+<li>计算公式<br> <img src="/img/LOAM_Livox2.png" srcset="/img/loading.gif" lazyload alt="1"><br> <img src="/img/LOAM_Livox3.png" srcset="/img/loading.gif" lazyload alt="2"></li>
 <li>舍弃原则</li>
 </ol>
 <ul>
@@ -335,13 +335,13 @@
 <li>在当前帧中选取一点Pl，再从全局地图中选取距离Pl最近的5个点：先将Pl映射到地图系，在从地图系的KDtree里面选取5个点</li>
 <li>以当前帧的最后一点Pw的雷达姿态为准，计算当前帧到地图的转换矩阵来实现投影</li>
 <li>确保选取的5个Pi和点Pw在同一条直线上    </li>
-<li>残差计算<br> <img src="/%5Cimg%5CLOAM_Livox5.png" srcset="/img/loading.gif" lazyload alt="3和4计算思路"></li>
+<li>残差计算<br> <img src="/img/LOAM_Livox5.png" srcset="/img/loading.gif" lazyload alt="3和4计算思路"></li>
 </ol>
 </li>
-<li>面对面的残差计算<br> 和边对边的残差计算思路相同，就是计算是否是同一平面上由不同<br> <img src="/%5Cimg%5CLOAM_Livox6.png" srcset="/img/loading.gif" lazyload alt="计算思路"></li>
+<li>面对面的残差计算<br> 和边对边的残差计算思路相同，就是计算是否是同一平面上由不同<br> <img src="/img/LOAM_Livox6.png" srcset="/img/loading.gif" lazyload alt="计算思路"></li>
 <li>帧内运动补偿<ol>
 <li>分段处理：同一帧分成几部分，独立进行处理。相当于缩短运动时间，减轻运动带来的影响，分开处理还可以并行计算，缩短计算时间</li>
-<li>线性插值：假设在一帧中运动是均匀的，可以利用最后一个点的姿态变化去估计之前点的转换矩阵<img src="/%5Cimg%5CLOAM_Livox7.png" srcset="/img/loading.gif" lazyload alt="线性插值计算细节"></li>
+<li>线性插值：假设在一帧中运动是均匀的，可以利用最后一个点的姿态变化去估计之前点的转换矩阵<img src="/img/LOAM_Livox7.png" srcset="/img/loading.gif" lazyload alt="线性插值计算细节"></li>
 </ol>
 </li>
 <li>离群点剔除和移动对象过滤<br> 避免移动物体对扫描精度产生影响<br> 思路：在每次迭代重新计算所有特征点对应的残差，先做迭代优化残差，最后在优化后结果中去除前20%最大的点（边缘点和平面点分开进行处理）</li>

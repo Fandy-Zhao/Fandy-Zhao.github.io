@@ -26,12 +26,12 @@
 <meta property="og:site_name" content="ZF ZHAO">
 <meta property="og:description" content="工程目录结构（Stage模型）目录结构1234567891011121314151617├── AppScope &gt; app.json5：应用的全局配置信息，详见app.json5配置文件。├── entry：HarmonyOS工程模块，编译构建生成一个HAP包。（默认项目入口模块）    ├── src &gt; main &gt; ets：用于存放ArkTS源码。    ├── src">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/%5Cimg%5C%E5%BC%80%E5%8F%91to%E7%BC%96%E8%AF%91.png">
+<meta property="og:image" content="http://example.com/img/%E5%BC%80%E5%8F%91to%E7%BC%96%E8%AF%91.png">
 <meta property="article:published_time" content="2025-08-21T10:46:26.000Z">
-<meta property="article:modified_time" content="2025-08-21T15:44:25.454Z">
+<meta property="article:modified_time" content="2025-08-22T13:37:52.356Z">
 <meta property="article:author" content="ZF ZHAO">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/%5Cimg%5C%E5%BC%80%E5%8F%91to%E7%BC%96%E8%AF%91.png">
+<meta name="twitter:image" content="http://example.com/img/%E5%BC%80%E5%8F%91to%E7%BC%96%E8%AF%91.png">
   
   
   
@@ -336,7 +336,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="编译态包结构"><a href="#编译态包结构" class="headerlink" title="编译态包结构"></a>编译态包结构</h2><p>不同类型的Module编译后会生成对应的HAP、HAR、HSP等文件，开发态视图与编译态视图的对照关系如下<br><img src="/%5Cimg%5C%E5%BC%80%E5%8F%91to%E7%BC%96%E8%AF%91.png" srcset="/img/loading.gif" lazyload alt="开发态与编译态的工程结构视图"></p>
+<h2 id="编译态包结构"><a href="#编译态包结构" class="headerlink" title="编译态包结构"></a>编译态包结构</h2><p>不同类型的Module编译后会生成对应的HAP、HAR、HSP等文件，开发态视图与编译态视图的对照关系如下<br><img src="/img/%E5%BC%80%E5%8F%91to%E7%BC%96%E8%AF%91.png" srcset="/img/loading.gif" lazyload alt="开发态与编译态的工程结构视图"></p>
 <h1 id="HAP开发"><a href="#HAP开发" class="headerlink" title="HAP开发"></a>HAP开发</h1><p>HAP（Harmony Ability Package）是应用安装和运行的基本单元。HAP包是由代码、资源、第三方库、配置文件等打包生成的模块包</p>
 <h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><ul>
 <li>entry类型的HAP：应用的主模块，包含应用的入口界面、入口图标和主功能特性，编译后生成entry类型的HAP。每一个应用分发到同一类型的设备上的应用程序包，只能包含唯一一个entry类型的HAP，也可以不包含。</li>
