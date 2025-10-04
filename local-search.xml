@@ -4,6 +4,27 @@
   
   
   <entry>
+    <title>Git学习</title>
+    <link href="/2025/10/04/25_10_04Git%E5%AD%A6%E4%B9%A0/"/>
+    <url>/2025/10/04/25_10_04Git%E5%AD%A6%E4%B9%A0/</url>
+    
+    <content type="html"><![CDATA[<h2 id="学习目的"><a href="#学习目的" class="headerlink" title="学习目的"></a>学习目的</h2><ul><li>掌握版本管理的基础知识</li><li>适应团队多人合作完成项目</li></ul><h2 id="基础指令"><a href="#基础指令" class="headerlink" title="基础指令"></a>基础指令</h2><p>创建&#x2F;克隆仓库</p><ul><li>git init: 初始化一个Git仓库</li><li>git clone <url>: 克隆一个远程仓库到本地</li></ul><p>本地仓库管理</p><ul><li>git status: 查看当前仓库的状态</li><li>git add <file>: 添加文件到暂存区 （可以添加多个文件，-all是全部文件）</li><li>git commit -m “message”: 提交暂存区的文件到本地仓库，-m后面是提交信息</li><li>git log: 查看提交历史</li><li>git reset –hard HEAD~1: 回退到上一个提交，-hard是强制回退，会丢失所有未提交的修改</li><li>git reflog: 查看所有操作记录，可以用来找回误删的提交(包括回退操作)</li><li>git diff: 查看文件的修改内容</li><li>git reset <file>: 将文件从暂存区移除</li><li>git checkout – <file>: 撤销文件的修改</li><li>git rm <file>: 删除文件，并将删除操作添加到暂存区</li><li>git mv <old> <new>: 重命名文件，并将重命名操作添加到暂存区</li></ul><p>远程，本地仓库管理</p><ul><li>git push: 将本地仓库的提交推送到远程仓库</li><li>git pull: 从远程仓库拉取最新的提交并合并到本地仓库</li></ul><p>分支管理</p><ul><li>git branch: 查看当前分支</li><li>git switch <branch>: 切换到指定分支</li><li>git merge <branch>: 将指定分支合并到当前分支</li></ul><h2 id="团队协作的流程"><a href="#团队协作的流程" class="headerlink" title="团队协作的流程"></a>团队协作的流程</h2><ol><li>每个人从远程仓库克隆项目到本地</li><li>每个人在本地创建一个新分支，用于开发新功能或修复bug</li><li>每个人在本地开发完成后，将代码提交到自己的分支</li><li>每个人将自己的分支推送到远程仓库</li><li>其他成员从远程仓库拉取最新的提交并合并到自己的分支</li><li>当一个成员的分支开发完成后，他可以将分支合并到主分支（如master或main）</li><li>其他成员从主分支拉取最新的提交并合并到自己的分支</li></ol><h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ul><li>每个成员在开发前都应该先从远程仓库拉取最新的提交，避免冲突</li><li>每个成员在提交代码前都应该先查看当前仓库的状态，确保没有未提交的修改</li><li>每个成员在合并分支前都应该先测试代码，确保没有错误</li><li>每个成员在合并分支后都应该删除自己的分支，避免分支污染</li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>APP开发</category>
+      
+      <category>团队协作</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>强化学习</title>
     <link href="/2025/09/08/25_09_08%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"/>
     <url>/2025/09/08/25_09_08%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/</url>
