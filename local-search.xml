@@ -8,7 +8,7 @@
     <link href="/2025/09/08/25_09_08%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"/>
     <url>/2025/09/08/25_09_08%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/</url>
     
-    <content type="html"><![CDATA[<h1 id="基础理论知识学习"><a href="#基础理论知识学习" class="headerlink" title="基础理论知识学习"></a>基础理论知识学习</h1><p>详情见笔记</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><ul><li><p><strong>value-based</strong> and <strong>policy-based</strong>:<br>  <strong>value-based</strong>:基于状态价值和动作价值来更新策略(不是直接学习策略)，原理类似于先求出每个状态-动作对的价值,据此来选择最佳策略，有点类似动态规划（DP）。又分为value iterationn和policy iteration。</p><p>  对于<strong>value iteration</strong>,先进行<strong>policy update</strong>,将状态价值迭代至收敛即最优并更新策略，再进行<strong>value update</strong>，根据更新后的策略来更新状态价值。</p><p>  对于<strong>policy iteration</strong>,先进行<strong>policy evalution</strong>，一般利用<strong>蒙特卡罗方法MC</strong>和<strong>时序差分方法TD（SARSA,Q-Learning）<strong>来求出策略的状态价值，再进行</strong>policy improvement</strong>对当前策略进行更新，一般都会使用<strong>ε-贪婪探索</strong></p><p>  <strong>policy-based</strong>：直接基于策略更新，将策略看成函数，最优策略就是一个使用使得损失函数最小的参数的函数，一般使用策略梯度更新。常见算法:REINFORCE,Actor-Critic,TRPO,PPO,TD3等</p></li><li><p><strong>off-online</strong> and <strong>on-line</strong>:<br>  <strong>off-online</strong>:学习的策略和采样的行为策略不一样，高效（经验池回放，重复性采样）但分布不一致（需要重要性采样），有Q-Learning,DQN<br>  <strong>on-online</strong>:学习的策略和采样的行为策略一样，稳定但信息利用率低，有SARSA，REINFORCE，PPO</p></li></ul><h1 id="针对四足的强化学习项目"><a href="#针对四足的强化学习项目" class="headerlink" title="针对四足的强化学习项目"></a>针对四足的强化学习项目</h1><h2 id="项目框架"><a href="#项目框架" class="headerlink" title="项目框架"></a>项目框架</h2><p>基于现成框架，可以更好进行二次开发</p><ul><li><a href="https://github.com/leggedrobotics/legged_gym">legged_gym</a>基于Isaac_Gym，提供四足机器人的环境，包括模拟和真实环境</li><li><a href="https://github.com/leggedrobotics/rsl_rl">rsl_rl</a>基于legged_gym，提供强化学习算法的实现，包括PPO，TRPO，TD3等</li></ul><h2 id="强化学习算法"><a href="#强化学习算法" class="headerlink" title="强化学习算法"></a>强化学习算法</h2><p>目前大都基于PPO，TRPO的Actor-Critic框架</p><h2 id="学习感受"><a href="#学习感受" class="headerlink" title="学习感受"></a>学习感受</h2><ul><li>对于强化学习的理论知识要求不高，只需要知道大体的算法原理及其基本特点，尤其是PPO之类的AC算法</li><li>需要学习对应的强化学习框架，目前比较流行的框架是legged_gym和rsl_rl（基于Isaac_gym），可以去尝试跑通开源项目，理清框架，方便进行二次开发</li></ul>]]></content>
     
     
     <categories>
@@ -29,7 +29,7 @@
     <link href="/2025/09/08/25_09_08MPC%E5%AD%A6%E4%B9%A0/"/>
     <url>/2025/09/08/25_09_08MPC%E5%AD%A6%E4%B9%A0/</url>
     
-    <content type="html"><![CDATA[<h1 id="学习记录"><a href="#学习记录" class="headerlink" title="学习记录"></a>学习记录</h1><ol><li>学习MPC的基本原理，以及求解方法–<strong>二次规划</strong></li><li>发现和四足机器人的联系不大，还是不知道四足如何用MPC来控制</li><li>阅读足式机器人MPC综述<a href="https://doi.org/10.1080/01691864.2023.2168134">Model predictive control of legged and humanoid robots: models and algorithms</a>，了解到不同的动力学建模方式，不同的求解方式</li></ol>]]></content>
+    <content type="html"><![CDATA[<h1 id="学习记录"><a href="#学习记录" class="headerlink" title="学习记录"></a>学习记录</h1><ol><li>学习MPC的基本原理，以及求解方法–<strong>二次规划</strong></li><li>发现和四足机器人的联系不大，还是不知道四足如何用MPC来控制</li><li>阅读足式机器人MPC综述<a href="https://doi.org/10.1080/01691864.2023.2168134">Model predictive control of legged and humanoid robots: models and algorithms</a>，了解到不同的动力学建模方式，不同的求解方式</li></ol><h1 id="笔记整理"><a href="#笔记整理" class="headerlink" title="笔记整理"></a>笔记整理</h1>]]></content>
     
     
     <categories>
