@@ -19,25 +19,21 @@
   <meta name="author" content="ZF ZHAO">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Agile But Safe: Learning Collision-Free High-Speed Legged Locomotion项目地址：https:&#x2F;&#x2F;github.com&#x2F;LeCAR-Lab&#x2F;ABS环境配置（按照项目的Readme.md来配置） 创建conda环境，安装torch  安装Issac Gym建议按照https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;61877821">
+    <meta name="description" content="dijkstra算法dijkstra算法是一种用于解决单源最短路径问题的算法，即从一个顶点到其他所有顶点的最短路径。 dijkstra算法的基本思想是：从源点开始，每次选择距离源点最近的顶点，将其加入到已访问的顶点集合中，然后更新其他顶点的距离。 dijkstra算法的时间复杂度为O(n^2)，其中n为顶点数。 算法步骤 初始化距离数组dist，dist[i]表示源点到顶点i的最短距离，初始时di">
 <meta property="og:type" content="article">
-<meta property="og:title" content="项目记录--ABS">
-<meta property="og:url" content="http://example.com/2025/10/05/25_10_05%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95-ABS/index.html">
+<meta property="og:title" content="算法学习dijkstra,dfs,bfs,查并集">
+<meta property="og:url" content="http://example.com/2025/10/06/25_10_06%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="ZF ZHAO">
-<meta property="og:description" content="Agile But Safe: Learning Collision-Free High-Speed Legged Locomotion项目地址：https:&#x2F;&#x2F;github.com&#x2F;LeCAR-Lab&#x2F;ABS环境配置（按照项目的Readme.md来配置） 创建conda环境，安装torch  安装Issac Gym建议按照https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;61877821">
+<meta property="og:description" content="dijkstra算法dijkstra算法是一种用于解决单源最短路径问题的算法，即从一个顶点到其他所有顶点的最短路径。 dijkstra算法的基本思想是：从源点开始，每次选择距离源点最近的顶点，将其加入到已访问的顶点集合中，然后更新其他顶点的距离。 dijkstra算法的时间复杂度为O(n^2)，其中n为顶点数。 算法步骤 初始化距离数组dist，dist[i]表示源点到顶点i的最短距离，初始时di">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/img/ABS1.png">
-<meta property="og:image" content="http://example.com/img/ABS2.png">
-<meta property="og:image" content="http://example.com/img/ABS3.png">
-<meta property="article:published_time" content="2025-10-04T18:53:28.000Z">
-<meta property="article:modified_time" content="2025-10-04T19:08:33.624Z">
+<meta property="article:published_time" content="2025-10-06T04:13:09.000Z">
+<meta property="article:modified_time" content="2025-10-06T04:31:07.670Z">
 <meta property="article:author" content="ZF ZHAO">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/img/ABS1.png">
   
   
   
-  <title>项目记录--ABS - ZF ZHAO</title>
+  <title>算法学习dijkstra,dfs,bfs,查并集 - ZF ZHAO</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -214,7 +210,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="项目记录--ABS"></span>
+            <span id="subtitle" data-typed-text="算法学习dijkstra,dfs,bfs,查并集"></span>
           
         </div>
 
@@ -225,8 +221,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-10-05 02:53" pubdate>
-          2025年10月5日 凌晨
+        <time datetime="2025-10-06 12:13" pubdate>
+          2025年10月6日 中午
         </time>
       </span>
     
@@ -237,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          825 字
+          1.4k 字
         
       </span>
     
@@ -248,7 +244,7 @@
         
         
         
-          7 分钟
+          12 分钟
         
       </span>
     
@@ -285,71 +281,63 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">项目记录--ABS</h1>
+            <h1 id="seo-header">算法学习dijkstra,dfs,bfs,查并集</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Agile-But-Safe-Learning-Collision-Free-High-Speed-Legged-Locomotion"><a href="#Agile-But-Safe-Learning-Collision-Free-High-Speed-Legged-Locomotion" class="headerlink" title="Agile But Safe: Learning Collision-Free High-Speed Legged Locomotion"></a>Agile But Safe: Learning Collision-Free High-Speed Legged Locomotion</h1><h2 id="项目地址：https-github-com-LeCAR-Lab-ABS"><a href="#项目地址：https-github-com-LeCAR-Lab-ABS" class="headerlink" title="项目地址：https://github.com/LeCAR-Lab/ABS"></a>项目地址：<a target="_blank" rel="noopener" href="https://github.com/LeCAR-Lab/ABS">https://github.com/LeCAR-Lab/ABS</a></h2><h2 id="环境配置（按照项目的Readme-md来配置）"><a href="#环境配置（按照项目的Readme-md来配置）" class="headerlink" title="环境配置（按照项目的Readme.md来配置）"></a>环境配置（按照项目的Readme.md来配置）</h2><ol>
-<li><p>创建conda环境，安装torch</p>
-</li>
-<li><p>安装Issac Gym建议按照<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/618778210%E5%8E%BB%E9%85%8D%E7%BD%AE">https://zhuanlan.zhihu.com/p/618778210去配置</a></p>
-<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p> <img src="/img/ABS1.png" srcset="/img/loading.gif" lazyload alt="问题记录"></p>
-<ul>
-<li><p>安装方式过时</p>
-<p>  使用      pip install –use-pep517 .</p>
-</li>
-<li><p>依赖缺少</p>
-<p>  使用      pip install pygments</p>
-</li>
-</ul>
-</li>
-<li><p>克隆仓库，安装rsl_rl框架以及legged_gym</p>
-</li>
-<li><p>训练policy，并使用tensorboard（Ctrl+V或者在命令里面加入–headless可以关掉Isaacgym的渲染，加快训练）</p>
-<ol>
-<li>Agile policy<br> 在代码里面加了一个log地址的print,在终端执行命令之后，会有一个tensorboard地址的输出，按照输出的地址去启动一个tensordoard(我是因为6006端口被占用，所以需要指明端口6007，否则默认6006)，在去对应网址上查看就好。<br> <img src="/img/ABS2.png" srcset="/img/loading.gif" lazyload alt="问题记录"><br> 根据数据反馈，迭代次数在600左右就已经趋于稳定，没有必要迭代4000次。</li>
-<li>Recovery policy<br> 只要前面没问题，这里大概率没有问题</li>
-</ol>
-<p> 问题</p>
-<ol>
-<li><p>Agile policy</p>
-<ul>
-<li><p>无法找到gymtorch.cpp(Issac Gym里面的)</p>
-<p>  按照<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/618778210%E9%87%8C%E9%9D%A2%E7%9A%84%E5%8E%BB%E9%85%8DIsaacGym">https://zhuanlan.zhihu.com/p/618778210里面的去配IsaacGym</a></p>
-</li>
-<li><p>同时开vscode和tensorboard，tensorboard会把浏览器卡闪退</p>
-<p>最好浏览器少开界面，关掉其他应用</p>
-</li>
-</ul>
-</li>
+                <h1 id="dijkstra算法"><a href="#dijkstra算法" class="headerlink" title="dijkstra算法"></a>dijkstra算法</h1><p>dijkstra算法是一种用于解决单源最短路径问题的算法，即从一个顶点到其他所有顶点的最短路径。</p>
+<p>dijkstra算法的基本思想是：从源点开始，每次选择距离源点最近的顶点，将其加入到已访问的顶点集合中，然后更新其他顶点的距离。</p>
+<p>dijkstra算法的时间复杂度为O(n^2)，其中n为顶点数。</p>
+<h2 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h2><ol>
+<li>初始化距离数组dist，dist[i]表示源点到顶点i的最短距离，初始时dist[i]为无穷大，dist[source]为0。</li>
+<li>初始化已访问顶点集合visited，初始时visited为空。</li>
+<li>重复以下步骤n次（n为顶点数）：<ol>
+<li>从距离数组dist中选择距离源点最近的顶点u(使用优先队列)，将其加入到已访问顶点集合visited中。</li>
+<li>更新其他顶点的距离(根据题目,有不同的更新方式)：如果顶点v未被访问，且通过u到达v的距离小于当前dist[v]，则更新dist[v]为通过u到达v的距离。</li>
 </ol>
 </li>
-<li><p>训练RAnetwork（没有tensorboard，待加入）</p>
-<ol>
-<li>训练<br> testbed.py的line289决定迭代次数？不是很确定<br> 之后按照readme的指导做就可以</li>
+<li>最终dist数组中的值即为源点到其他所有顶点的最短距离。</li>
+</ol>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;queue&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stack&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">100</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> INF = <span class="hljs-number">100000</span>;<br><br><span class="hljs-type">int</span> p[N][N], d[N], path[N];<span class="hljs-comment">//存放结点，距离，路径</span><br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">dijkstra</span><span class="hljs-params">(<span class="hljs-type">int</span> bgn, <span class="hljs-type">int</span> n)</span></span>&#123;<br>    <span class="hljs-type">int</span> i,j,min,min_num;<br>    <span class="hljs-type">int</span> mark[N] = &#123;<span class="hljs-number">0</span>&#125;;<span class="hljs-comment">//标记数组</span><br>    <span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;=n;i++)&#123;<br>        d[i] = p[bgn][i];<br>    &#125;<br>    mark[bgn] = <span class="hljs-number">1</span>;<br>    d[bgn] = <span class="hljs-number">0</span>;<br><br>    <span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;n;i++)&#123;<br>        min = INF;<br>        <span class="hljs-keyword">for</span>(j=<span class="hljs-number">1</span>;j&lt;=n;j++)&#123;<br>            <span class="hljs-comment">//寻找距离目标点最近且没有别寻找过的点</span><br>            <span class="hljs-keyword">if</span>(mark[j] == <span class="hljs-number">0</span> &amp;&amp; d[j]&lt;min)&#123;<br>                min = d[j];<br>                min_num = j;<br>            &#125;<br>        &#125;<br>        mark[min_num] = <span class="hljs-number">1</span>;<span class="hljs-comment">//修改标记点</span><br>        <span class="hljs-keyword">for</span>(j=<span class="hljs-number">1</span>;j&lt;=n;j++)&#123;<br>            <span class="hljs-comment">//更新距离</span><br>            <span class="hljs-keyword">if</span>(mark[j] == <span class="hljs-number">0</span> &amp;&amp; d[j] &gt; d[min_num] + p[min_num][j])&#123;<br>                d[j] = d[min_num] + p[min_num][j];<br>                path[j] = min_num;<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-type">int</span> bgn, <span class="hljs-type">int</span> n)</span>       <span class="hljs-comment">//bgn为出发节点，n表示图中节点总数</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> i, j;<br>    stack&lt;<span class="hljs-type">int</span>&gt; q;               <span class="hljs-comment">//由于记录的中途节点是倒序的，所以使用栈（先进后出），获得正序</span><br>    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">2</span>; i &lt;=n; i++)            <span class="hljs-comment">//打印从出发节点到各节点的最短距离和经过的路径</span><br>    &#123;<br>        j = i;<br>        <span class="hljs-keyword">while</span> (path[j] != <span class="hljs-number">-1</span>)      <span class="hljs-comment">//如果j有中途节点</span><br>        &#123;<br>            q.<span class="hljs-built_in">push</span>(j);          <span class="hljs-comment">//将j压入堆</span><br>            j = path[j];          <span class="hljs-comment">//将j的前个中途节点赋给j</span><br>        &#125;<br>        q.<span class="hljs-built_in">push</span>(j);<br>        cout &lt;&lt; bgn &lt;&lt; <span class="hljs-string">&quot;=&gt;&quot;</span> &lt;&lt; i &lt;&lt;<span class="hljs-string">&quot; length:&quot;</span>&lt;&lt; d[i]&lt;&lt;<span class="hljs-string">&quot; path  &quot;</span> &lt;&lt; bgn;<br>        <span class="hljs-keyword">while</span> (!q.<span class="hljs-built_in">empty</span>())       <span class="hljs-comment">//先进后出,获得正序</span><br>        &#123;<br>            cout &lt;&lt; q.<span class="hljs-built_in">top</span>();<br>            <span class="hljs-comment">//printf(&quot;%d &quot;, q.top());//打印堆的头节点</span><br>            q.<span class="hljs-built_in">pop</span>();            <span class="hljs-comment">//将堆的头节点弹出</span><br>        &#125;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<h1 id="dfs算法-深度优先搜索"><a href="#dfs算法-深度优先搜索" class="headerlink" title="dfs算法(深度优先搜索)"></a>dfs算法(深度优先搜索)</h1><p>dfs算法是一种用于遍历或搜索树或图的算法。</p>
+<p>dfs算法的基本思想是：从起始顶点开始，每次选择一个未被访问的邻接顶点，将其加入到已访问的顶点集合中，然后递归地访问该顶点的未被访问的邻接顶点。</p>
+<p>dfs算法的时间复杂度为O(n+m)，其中n为顶点数，m为边数。</p>
+<h2 id="算法步骤-1"><a href="#算法步骤-1" class="headerlink" title="算法步骤"></a>算法步骤</h2><ol>
+<li>初始化已访问顶点集合visited，初始时visited为空。</li>
+<li>从起始顶点开始，执行以下步骤：<ol>
+<li>如果当前顶点未被访问，则将其加入到已访问顶点集合visited中。</li>
+<li><strong>递归</strong>地访问当前顶点的未被访问的邻接顶点。</li>
 </ol>
 </li>
+<li>重复步骤2，直到所有顶点都被访问。</li>
 </ol>
-<h2 id="项目概述"><a href="#项目概述" class="headerlink" title="项目概述"></a>项目概述</h2><h3 id="项目框架"><a href="#项目框架" class="headerlink" title="项目框架"></a>项目框架</h3><p>基于legged_gym和rsl_rl。<br>legged_gym负责提供强化学习的整体框架，从环境创建，智能体创建到训练过程。<br>rsl_rl负责提供强化学习的算法，如PPO，A-C network。</p>
-<h3 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h3><p>大体工作流程是：ray-prediction network获取深度信息，和自身的状态信息一起给RA network，之后RA负责决定使用哪一个policy。如果没有障碍就用agile去加速，需要紧急避障的时候切换recovery去避障</p>
-<ul>
-<li>Policy （约束，奖励不同的PPO网络）<ul>
-<li>Agile policy  负责快速到达目的地</li>
-<li>Recovery policy  负责在短暂时间内避开障碍，此时自身速度较快</li>
-</ul>
+<h1 id="bfs算法-广度优先搜索"><a href="#bfs算法-广度优先搜索" class="headerlink" title="bfs算法(广度优先搜索)"></a>bfs算法(广度优先搜索)</h1><p>bfs算法是一种用于遍历或搜索树或图的算法。</p>
+<p>bfs算法的基本思想是：从起始顶点开始，每次选择距离源点最近的顶点，将其加入到已访问的顶点集合中，然后递归地访问该顶点的未被访问的邻接顶点。</p>
+<p>bfs算法的时间复杂度为O(n+m)，其中n为顶点数，m为边数。</p>
+<h2 id="算法步骤-2"><a href="#算法步骤-2" class="headerlink" title="算法步骤"></a>算法步骤</h2><ol>
+<li>初始化已访问顶点集合visited，初始时visited为空。</li>
+<li>从起始顶点开始，执行以下步骤：<ol>
+<li>如果当前顶点未被访问，则将其加入到已访问顶点集合visited中。</li>
+<li>将当前顶点的未被访问的<strong>邻接顶点</strong>加入到队列中。</li>
+</ol>
 </li>
-<li>Reach-Avoid  network  根据自身(姿态，电机位置等信息)和外界环境（深度图获取的二维地势）的状态感知来决定执行哪一种policy</li>
-<li>ray-prediction network （仿真时不需要） 实际部署时将深度图转为二维平面信息的网络</li>
-</ul>
-<h2 id="项目评估"><a href="#项目评估" class="headerlink" title="项目评估"></a>项目评估</h2><h3 id="Agile-policy训练阶段"><a href="#Agile-policy训练阶段" class="headerlink" title="Agile policy训练阶段"></a>Agile policy训练阶段</h3><p>在700次（30分钟以内）的迭代过程中，agile policy就达到了不错的收敛性</p>
-<h3 id="Recovery-policy训练阶段"><a href="#Recovery-policy训练阶段" class="headerlink" title="Recovery policy训练阶段"></a>Recovery policy训练阶段</h3><p>和agile policy效果相似，收敛性不错，但是前期训练速度比agile policy慢好多，应该是训练目的不同</p>
-<h3 id="RA-network（项目重点）"><a href="#RA-network（项目重点）" class="headerlink" title="RA network（项目重点）"></a>RA network（项目重点）</h3><p>训练过程没有记录，只记录网络评估结果。<br>结果分析：<br>成功率74%，超时率14%，平均速度1.36m&#x2F;s,轨迹跟踪速度（agile policy）2.78m&#x2F;s<br>RA触发率 65%，触发RA之后的成功率83%<br>触发RA之后的碰撞概率44%，没有触发RA的碰撞概率55%<br>结合论文数据，成功率（85%），超时率（11%），平均速度（1.87）有差别但是并不大。<br><img src="/img/ABS3.png" srcset="/img/loading.gif" lazyload alt="评价记录"></p>
-<h3 id="评价"><a href="#评价" class="headerlink" title="评价"></a>评价</h3><ul>
-<li>侧重点在于高速且安全的导航算法，避障主要是躲避面前较大的障碍物，没有过多提及对于复杂地形的适应性。</li>
-<li>两个policy是分开的两组PPO的Policy，二次开发可以借鉴</li>
-<li>RA的加入就是选择执行哪一个策略</li>
-</ul>
+<li>重复步骤2，直到所有顶点都被访问。</li>
+</ol>
+<h2 id="dfs和bfs的区别"><a href="#dfs和bfs的区别" class="headerlink" title="dfs和bfs的区别"></a>dfs和bfs的区别</h2><ol>
+<li>dfs是一种递归算法，而bfs是一种非递归算法。</li>
+<li>dfs的搜索顺序是深度优先，而bfs的搜索顺序是广度优先。</li>
+</ol>
+<h1 id="查并集算法"><a href="#查并集算法" class="headerlink" title="查并集算法"></a>查并集算法</h1><p>查并集算法是一种用于处理不相交集合的数据结构。</p>
+<p>查并集算法的基本操作包括：查找（find）和合并（merge）。</p>
+<p>查找操作用于确定一个元素属于哪个集合，合并操作用于将两个集合合并为一个集合。</p>
+<h2 id="算法步骤-3"><a href="#算法步骤-3" class="headerlink" title="算法步骤"></a>算法步骤</h2><ol>
+<li>初始化每个元素的父节点为自身，表示每个元素都是一个独立的集合。</li>
+<li>查找操作：对于一个元素x，递归地查找其父节点，直到找到根节点。</li>
+<li>合并操作：对于两个元素x和y，分别查找它们的根节点rx和ry，如果rx和ry不同，则将ry的父节点设为rx，表示将两个集合合并为一个集合。</li>
+</ol>
+<h2 id="变式"><a href="#变式" class="headerlink" title="变式"></a>变式</h2><p>简单的查并集算法查找和合并操作的时间复杂度较高,可以考虑带秩优化,即将树的高度限制在一个较小的范围内,从而提高查找和合并操作的效率。</p>
 
                 
               </div>
@@ -368,7 +356,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%EF%BC%8C%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%EF%BC%8C%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95/" class="category-chain-item">四足机器人，强化学习，项目记录</a>
+  <a href="/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" class="category-chain-item">算法学习</a>
   
   
 
@@ -388,8 +376,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>项目记录--ABS</div>
-      <div>http://example.com/2025/10/05/25_10_05项目记录-ABS/</div>
+      <div>算法学习dijkstra,dfs,bfs,查并集</div>
+      <div>http://example.com/2025/10/06/25_10_06算法学习/</div>
     </div>
     <div class="license-meta">
       
@@ -401,7 +389,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年10月5日</div>
+          <div>2025年10月6日</div>
         </div>
       
       
@@ -433,18 +421,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/10/06/25_10_06%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" title="算法学习dijkstra,dfs,bfs,查并集">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">算法学习dijkstra,dfs,bfs,查并集</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/10/04/25_10_04Git%E5%AD%A6%E4%B9%A0/" title="Git学习">
-                        <span class="hidden-mobile">Git学习</span>
+                      <a href="/2025/10/05/25_10_05%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95-ABS/" title="项目记录--ABS">
+                        <span class="hidden-mobile">项目记录--ABS</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
