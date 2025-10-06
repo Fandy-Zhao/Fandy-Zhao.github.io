@@ -1,4 +1,6 @@
-# [个人博客](https://fandy-zhao.github.io/)
+# 个人博客
+
+[传送门](https://fandy-zhao.github.io/)
 
 用以记录我大学以来的学习经历。
 
